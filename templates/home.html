@@ -15,6 +15,9 @@ body {
 #header {
 	position: fixed;
 }
+
+p{	margin: 0 !important;	}
+
 .button {
     color: white;
     background: #e74c3c;
@@ -32,21 +35,51 @@ body {
     border-radius: 3px;
 }
 
-p{	margin: 0 !important;	}
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  
+  -webkit-animation:fadeIn ease-in 1; 
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1.5s;
+  -moz-animation-duration:1.5s;
+  animation-duration:1.5s;
+}
+
+.fade-in.title {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.fade-in.description {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay:1.5s;
+  animation-delay: 1.5s;
+}
 
 </style>
 </head>
 
 <body>
 <img src="../static/ebook_circle.png" alt="storyboardlogo" width="250" height="250"/>
-<div class="header">
+<div class="header fade-in title">
 <p style="font-size: 100px; line-height: 200%">StoryBored</p>
 </div>
-<div class="toLogin">
+<div class="toLogin fade-in description">
 <p style="font-size: 20px; line-height: 25%">Where you come to write stories <i>on</i> our board</p><br><p style="font-size: 20px"><i>when</i> you're bored.</p>
+</div>
 <br>
 <a class="button" href="login.html">LOGIN</a>
-</div>
+
 
 </body>
 
