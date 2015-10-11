@@ -2,21 +2,36 @@
 <html>
 <head>
 <title>StoryBored</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
-body {
+
+html, body {
 	margin: 0 0;
-	padding-top: 100px;
-	background-color:#1abc9c;
+	height: 100%;
 	color:white;
 	text-align: center;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#header {
-	position: fixed;
+p{	margin: 0 !important;	}
+
+.wrapper {
+	padding-top: 50px;
+	background-color:#1abc9c;
+	min-height: 100%;
+}
+.how {
+	padding-top: 50px;
+	background-color: #f1c40f;
+	min-height: 100%;
 }
 
-p{	margin: 0 !important;	}
+.team {
+	padding-top: 50px;
+	background-color: #9b59b6;
+	min-height: 100%;
+	color: white;
+}
 
 .button {
     color: white;
@@ -40,46 +55,88 @@ p{	margin: 0 !important;	}
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fade-in {
-  opacity:0;  
-  -webkit-animation:fadeIn ease-in 1; 
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
+  	opacity:0;  
+  	-webkit-animation:fadeIn ease-in 1; 
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
 
-  -webkit-animation-fill-mode:forwards;  
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
+	-webkit-animation-fill-mode:forwards;  
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
 
-  -webkit-animation-duration:1.5s;
-  -moz-animation-duration:1.5s;
-  animation-duration:1.5s;
+	-webkit-animation-duration:1.5s;
+	-moz-animation-duration:1.5s;
+	animation-duration:1.5s;
+
+	-webkit-animation-delay: 0.2s;
+	-moz-animation-delay: 0.2s;
+	animation-delay: 0.2s;
 }
-
-.fade-in.title {
-  -webkit-animation-delay: 0.2s;
-  -moz-animation-delay: 0.2s;
-  animation-delay: 0.2s;
-}
-
-.fade-in.description {
-  -webkit-animation-delay: 1.5s;
-  -moz-animation-delay:1.5s;
-  animation-delay: 1.5s;
+.alignleft { 
+	float: left;
+	padding-left: 10px;
+	width: 100%;
 }
 
 </style>
 </head>
 
 <body>
-<img src="../static/ebook_circle.png" alt="storyboardlogo" width="250" height="250"/>
-<div class="header fade-in title">
-<p style="font-size: 100px; line-height: 200%">StoryBored</p>
+<div class="wrapper">
+	<img src="../static/ebook_circle.png" alt="storyboardlogo" width="250" height="250"/>
+	<div class="fade-in">
+		<p style="font-size: 100px; line-height: 200%">StoryBored</p>
+		<p style="font-size: 20px; line-height: 25%">Where you come to write stories <i>on</i> our board</p><br><p style="font-size: 20px"><i>when</i> you're bored.</p>
+	</div>
+	<br>
+	<a class="button" href="login.html">LOGIN</a>
+	<br><br>
+	<img src="../static/down-caret.png" alt="more" height="40"/>
 </div>
-<div class="toLogin fade-in description">
-<p style="font-size: 20px; line-height: 25%">Where you come to write stories <i>on</i> our board</p><br><p style="font-size: 20px"><i>when</i> you're bored.</p>
+<div class="how">
+	<table>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
 </div>
+<<<<<<< HEAD
 <br>
 <a class="button" href="/login">LOGIN</a>
+=======
+<div class="team">
+	<p style="font-size: 80px; line-height: 200%">Our Team</p>
+>>>>>>> added panels for home--inc
 
+	<table align="center" cellpadding="15">
+	<tr><td colspan="2" align="center">TEAM LEADER</td></tr>	
+		<tr>
+			<td><img src="../static/angela.png" alt="more" height="40"/></td>
+			<td>Angela Chan</td>
+		</tr>
+	<tr><td colspan="2" align="center">USER EXPERIENCE DESIGNER</td></tr>	
+		<tr>
+			<td><img src="../static/amanda.png" alt="more" height="40"/></td>
+			<td>Amanda Chiu</td>
+		</tr>
+	<tr><td colspan="2" align="center">BACKEND DEVELOPER</td></tr>	
+		<tr>
+			<td><img src="../static/leon.png" alt="more" height="40"/></td>
+			<td>Leon Cheng</td>
+		</tr>
+	<tr><td colspan="2" align="center">MIDDLEWARE DEVELOPER</td></tr>	
+		<tr>
+			<td><img src="../static/eric.png" alt="more" height="40"/></td>
+			<td>Eric Stringham</td>
+		</tr>
+	</table>
+	<p class="alignleft team">© Zamansky Period 7 Fall 2015</p>
+</div>
 
 </body>
 
