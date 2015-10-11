@@ -1,0 +1,17 @@
+<!!DOCTYPE HTML>
+<html>
+<head>
+<title>StoryBored</title>
+<style>
+#header {
+background-color:#00CC99;
+color:black; }
+</style>
+</head>
+<body>
+<div id="header">
+<h1>StoryBored</h1>
+</div>
+
+</body>
+</html>
