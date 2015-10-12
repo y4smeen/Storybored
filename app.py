@@ -1,11 +1,11 @@
 
-from flask import Flask, render_template, request, session, url_for
-
+from flask import Flask, render_template, request, session, redirect, url_for
+import user
 
 app = Flask(__name__)
 @app.route('/')
 @app.route("/home")
-def about():
+def home():
     return render_template("home.html")
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -14,10 +14,27 @@ def login():
     if request.method=="GET":
         return render_template("login.html")
     else:
-        username = request.form["username"]
-        password = request.form["password"]
+        uname = request.form["username"]
+        pword = request.form["password"]
         sub      = request.form["sub"]
+        if user.authenticate(uname, pword):
+            session["uname"]=uname
+            session["logged"]=1
+            return redirect(url_for("userpage"))
+        else:
+            return "You have entered an incorrect username or password <hr> Click <a href = '/login'> here </a> to go back to login page." #TODO: make an html page for this
         return render_template("login.html")
+
+@app.route("/userpage")
+def userpage():
+    uname = session["uname"]
+    return render_template("userpage.html",uname=uname)
+
+@app.route("/logout")
+def logout():
+    session["username"]=""
+    session["logged"]=0
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.debug = True
