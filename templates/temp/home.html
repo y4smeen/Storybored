@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block contents %}
+<!-- Note: Personally, would try to avoid fixed sizes, in pixels especially.
+           that being said, this is an index page, so the rules are different. 
+-->
+<img id="logo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo">
+<div class="fade-in title">
+    <span style="font-size:100px;line-height:200%">StoryBored</span>
+</div>
+<div class="fade-in description">
+    <p style="font-size:20px;margin-top:-10px;line-height:30px;">Where you come to write stories <i>on</i> our board<br/>
+    <i>when</i> you're bored.</p>
+</div>
+<a id = "login-button" href="{{ url_for('temp_login') }}">LOGIN</a>
+{% endblock %}

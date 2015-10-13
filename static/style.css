@@ -1,0 +1,68 @@
+/* ----- NORMAL FORMATTING -----*/
+
+
+
+
+/* ----- HOMEPAGE SPECIFIC FORMATTING ----- */
+.index {
+    margin: 0 0;
+    padding-top: 100px;
+    background-color: #1abc9c;
+    color: #ffffff;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvectia, sans-serif;
+}
+
+.index #logo {
+    width: 250px;
+    height: 250px;
+}
+
+.index #login-button {
+    color: white;
+    background: #e74c3c;
+   	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   	border: none;
+    line-height: 22px;
+    padding: 10px 30px 10px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 18px;
+    text-decoration: none;
+    	-webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.index .fade-in {
+  opacity:0;  
+  -webkit-animation:fadeIn ease-in 1; 
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1.5s;
+  -moz-animation-duration:1.5s;
+  animation-duration:1.5s;
+}
+
+.index .fade-in.title {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.index .fade-in.description {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay:1.5s;
+  animation-delay: 1.5s;
+}
+

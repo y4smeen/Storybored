@@ -35,6 +35,14 @@ def logout():
     session["username"]=""
     session["logged"]=0
     return redirect(url_for("home"))
+    
+@app.route("/temp/")
+def temp():
+    return render_template("temp/home.html", index=True)
+    
+@app.route("/temp/login/")
+def temp_login():
+    return render_template("temp/login.html")
 
 if __name__ == "__main__":
     app.debug = True
