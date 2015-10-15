@@ -30,6 +30,10 @@ def userpage():
     uname = session["uname"]
     return render_template("userpage.html",uname=uname)
 
+@app.route("/newpost")
+def newpost():
+    return render_template("newpost.html")
+
 @app.route("/logout")
 def logout():
     session["username"]=""

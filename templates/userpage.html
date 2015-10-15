@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+{% extends "base.html"  %}
+
+{% block contents %}
 
 <h1>This is the userpage</h1>
 <br>
 <h2> Welcome, <u>{{uname}}</u>! </h3>
 
-<button><a href="/newpost"> Make a New Post </a></button>
+<button><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
 
 <table>
 
@@ -12,6 +14,6 @@
 
 <br><br>
 
-<button><a href = "/logout"> Logout </a></button>
+<button><a href = "{{url_for('login')}}"> Logout </a></button>
 
-</html>
+{% endblock %}
