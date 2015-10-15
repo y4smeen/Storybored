@@ -34,6 +34,10 @@ def userpage():
 def newpost():
     return render_template("newpost.html")
 
+@app.route("/story")
+def story():
+    return render_template("story.html")
+
 @app.route("/logout")
 def logout():
     session["username"]=""
