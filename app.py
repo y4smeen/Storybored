@@ -25,6 +25,17 @@ def login():
             return "You have entered an incorrect username or password <hr> Click <a href = '/login'> here </a> to go back to login page." #TODO: make an html page for this
         return render_template("login.html")
 
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    if request.method=="GET":
+        return render_template("signup.html")
+    else:
+        return redirect(url_for("confirm"))
+
+@app.route("/confirm")
+def confirm():
+    return render_template("confirm.html")
+
 @app.route("/userpage")
 def userpage():
     uname = session["uname"]
