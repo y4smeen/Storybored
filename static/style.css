@@ -30,7 +30,7 @@ body {
     margin-top: 5px;
     margin-bottom: 18px;
     text-decoration: none;
-    	-webkit-border-radius: 3px;
+    -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     font-weight: bold;
@@ -115,7 +115,14 @@ p {
     width: 100%;
 }
 
+input[type="text"]{
+    padding: 1%;
+    border: none;
+}
+
 textarea {
     width: 30%;
     height: 100px;
+    padding: 1%;
+    border: none;
 }
