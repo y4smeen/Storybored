@@ -1,21 +1,35 @@
 {% extends "base.html"  %}
 
+{% block title %}
+
+Welcome, {{uname}}
+
+{% endblock %}
+
 {% block contents %}
 
 <h1>This is the userpage</h1>
 <br>
 <h2> Welcome, <u>{{uname}}</u>! </h3>
 
-<button><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
-
+<button class="btn"><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
+<center>
 <table>
    <tr>
-      <td class=cell><a href="{{url_for('story')}}">Hello</a></td>
+     <td class=cell><a href="{{url_for('story')}}">
+	 Hello
+	 </a>
+	 <br>
+	 by
+	 <br>
+	 Author
+     </td>
    </tr>
 </table>
+</center>
 
 <br><br>
 
-<button><a href = "{{url_for('login')}}"> Logout </a></button>
+<button class="btn"><a href = "{{url_for('login')}}"> Logout </a></button>
 
 {% endblock %}
