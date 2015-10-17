@@ -15,16 +15,16 @@
   <br>
   <textarea name="Body" form="usrform" maxlength="256">Enter text here...</textarea>
   <br>
-  <input type="submit" name="sub" value="Submit">
+  <input type="submit" name="sub" value="Submit" class="btn">
 </form>
 
 
 
 
-<button><a href="{{url_for('userpage')}}"> Back to the Main Page </a></button>
+<button class="btn"><a href="{{url_for('userpage')}}"> Back to the Main Page </a></button>
 
 <br><br>
 
-<button><a href="{{url_for('login')}}"> Log Out </a></button>
+<button class="btn"><a href="{{url_for('login')}}"> Log Out </a></button>
 
 {% endblock %}
