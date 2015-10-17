@@ -1,7 +1,7 @@
 # Storybored
 Bloginator Project, Zamansky 2015
 
-##Team Members
+## Team Members
 
 | Group Members  | Role                     | 
 |----------------|--------------------------|  
@@ -10,7 +10,7 @@ Bloginator Project, Zamansky 2015
 | Amanda Chiu    | User Experience Designer |
 | Eric Stringham | Middleware Developer     |
 
-##To Do (Pages)
+## To Do (Pages)
 
  - [ ] Home Page
  - [ ] Login Page
