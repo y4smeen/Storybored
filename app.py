@@ -46,25 +46,23 @@ def userpage():
 
 @app.route("/newpost")
 def newpost():
-    return render_template("newpost.html")
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    else:
+        return render_template("newpost.html")
 
 @app.route("/story")
 def story():
-    return render_template("story.html")
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    else:
+        return render_template("story.html")
 
 @app.route("/logout")
 def logout():
     session["username"]=""
     session["logged"]=0
     return redirect(url_for("home"))
-    
-@app.route("/temp/")
-def temp():
-    return render_template("temp/home.html", index=True)
-    
-@app.route("/temp/login/")
-def temp_login():
-    return render_template("temp/login.html")
 
 if __name__ == "__main__":
     app.debug = True
