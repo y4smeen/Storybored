@@ -11,8 +11,8 @@ Bloginator Project, Zamansky 2015
 | Eric Stringham | Middleware Developer     |
 
 * TODO To Do (Pages)
-- Home Page
-- Login Page
-- Main Page
-- Story Page
-- New Post Page
+- [ ] Home Page
+- [ ] Login Page
+- [ ] Main Page
+- [ ] Story Page
+- [ ] New Post Page
