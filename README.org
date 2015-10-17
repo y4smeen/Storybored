@@ -10,9 +10,9 @@ Bloginator Project, Zamansky 2015
 | Amanda Chiu    | User Experience Designer |
 | Eric Stringham | Middleware Developer     |
 
-* TODO To Do (Pages)
+* TODO To Do (Pages) [1/5]
 
-- [-] Home Page
+- [X] Home Page
 - [ ] Login Page
 - [ ] Main Page
 - [ ] Story Page
