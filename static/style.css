@@ -4,7 +4,7 @@
 
 
 /* ----- HOMEPAGE SPECIFIC FORMATTING ----- */
-.index {
+body {
     margin: 0 0;
     padding-top: 100px;
     background-color: #1abc9c;
@@ -18,7 +18,7 @@
     height: 250px;
 }
 
-.index #login-button {
+.btn {
     color: white;
     background: #e74c3c;
    	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
