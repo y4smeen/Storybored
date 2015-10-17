@@ -67,7 +67,7 @@ body {
   animation-delay: 1.5s;
 }
 
-td {
+.cell {
   width:  200px;
   height: 200px;
   background-image: url("Book.png");
@@ -77,4 +77,39 @@ td {
 
 a {
     color: WHITE;
+}
+
+.how {
+    padding-top:50px;
+    background-color: #f1c40f;
+    min-height: 100%;
+}
+
+.wrapper {
+    /*padding-top: 20px;*/
+    background-color:#1abc9c;
+    min-height: 100%;
+}
+
+p {
+    margin:0 !important;
+}
+
+.credits {
+    -webkit-column-span: all;
+    column-span: all;
+    align:"center";
+}
+
+.team {
+    padding-top: 50px;
+    background-color: #9b59b6;
+    min-height: 100%;
+    color: white;
+}
+
+.alignleft {
+    float: left;
+    padding-left: 10px;
+    width: 100%;
 }

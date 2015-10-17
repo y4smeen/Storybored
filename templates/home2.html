@@ -3,7 +3,8 @@
 {% block contents %}
 <!-- Note: Personally, would try to avoid fixed sizes, in pixels especially.
            that being said, this is an index page, so the rules are different. 
--->
+  -->
+<div class="wrapper">
 <img id="logo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo">
 <div class="fade-in title">
     <span style="font-size:100px;line-height:200%">StoryBored</span>
@@ -12,5 +13,45 @@
     <p style="font-size:20px;margin-top:-10px;line-height:30px;">Where you come to write stories <i>on</i> our board<br/>
     <i>when</i> you're bored.</p>
 </div>
-<button class="btn"><a id = "login-button" href="/login">LOGIN</a></button>
+<a class="btn" href="/login">LOGIN</a>
+<br><br>
+<a href="#credits"><img src="../static/down-caret.png" alt="Credits" height="40"></a>
+<div class="how">
+  <table>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<div class="team" id="credits">
+  <p style="font-size:80px; line-height: 200%">Our Team</p>
+  <table align="center" cellpadding="15">
+    <tr><td colspan="2" align="center">TEAM LEADER</td></tr>
+    <tr>
+      <td><img src="../static/angela.png" alt="Leader" height="40"></td>
+      <td>Angela Chan</td>
+    </tr>
+    <tr><td colspan="2" align="center">USER EXPERIENCE DESIGNER</td></tr>
+    <tr>
+      <td><img src="../static/amanda.png" alt="UX" height="40"></td>
+      <td>Amanda Chiu</td>
+    </tr>
+    <tr><td colspan="2" align="center">BACKEND DEVELOPER</td></tr>
+    <tr>
+      <td><img src="../static/leon.png" alt="backend"></td>
+      <td>Leon Cheng</td>
+    </tr>
+    <tr><td colspan="2" align="center">MIDDLEWARE DEVELOPER</td></tr>
+    <tr>
+      <td><img src="../static/eric.png" alt="middleware" height="40"></td>
+      <td>Eric Stringham</td>
+    </tr>
+  </table>
+  <p class="alignleft team">Zamansky Period 7 Fall 2015</p>
+</div>
 {% endblock %}
