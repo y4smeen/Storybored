@@ -38,8 +38,11 @@ def confirm():
 
 @app.route("/userpage")
 def userpage():
-    uname = session["uname"]
-    return render_template("userpage.html",uname=uname)
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    else:
+        username = session["uname"]
+        return render_template("userpage.html",uname=username)
 
 @app.route("/newpost")
 def newpost():
