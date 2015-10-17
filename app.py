@@ -44,7 +44,7 @@ def userpage():
         username = session["uname"]
         return render_template("userpage.html",uname=username)
 
-@app.route("/newpost")
+@app.route("/newpost", methods=['GET', 'POST'])
 def newpost():
     if session["logged"]==0:
         return redirect(url_for("login"))
