@@ -21,8 +21,8 @@ body {
 .btn {
     color: white;
     background: #e74c3c;
-   	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-   	border: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border: none;
     line-height: 22px;
     padding: 10px 30px 10px;
     text-align: center;
@@ -33,6 +33,7 @@ body {
     	-webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    font-weight: bold;
 }
 
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -54,13 +55,13 @@ body {
   animation-duration:1.5s;
 }
 
-.index .fade-in.title {
+.fade-in.title {
   -webkit-animation-delay: 0.2s;
   -moz-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
 
-.index .fade-in.description {
+.fade-in.description {
   -webkit-animation-delay: 1.5s;
   -moz-animation-delay:1.5s;
   animation-delay: 1.5s;
@@ -75,5 +76,5 @@ td {
 }
 
 a {
-  color: BLACK;
+    color: WHITE;
 }
