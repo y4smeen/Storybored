@@ -1,6 +1,7 @@
 # Storybored
 Bloginator Project, Zamansky 2015
-| Group Members  | Role                     |
+| Group Members  | Role                     | 
+|----------------|--------------------------|  
 | Angela Chan    | Leader                   |
 | Leon Cheng     | Backend Developer        |
 | Amanda Chiu    | User Experience Designer |
