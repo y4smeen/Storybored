@@ -114,3 +114,8 @@ p {
     padding-left: 10px;
     width: 100%;
 }
+
+textarea {
+    width: 30%;
+    height: 100px;
+}
