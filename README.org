@@ -12,7 +12,7 @@ Bloginator Project, Zamansky 2015
 
 * To Do (Pages)
 
- - [ ] Home Page
+ - [X] Home Page
  - [ ] Login Page
  - [ ] Main Page
  - [ ] Story Page
