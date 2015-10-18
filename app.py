@@ -1,6 +1,11 @@
-
 from flask import Flask, render_template, request, session, redirect, url_for
+from database import database
 import user
+
+DATABASE = './database.db'
+SCHEMA = [(u'CREATE TABLE stories (title text, author text, contents text)',)]
+
+db = database(DATABASE, SCHEMA)
 
 app = Flask(__name__)
 @app.route('/')
