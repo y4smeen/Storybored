@@ -1,7 +1,5 @@
 {% extends "base.html"  %}
-
-{% block title %} Welcome, {{uname}} {% endblock %}
-
+{% block title %} Welcome {% endblock %}
 {% block contents %}
 
 <div class="container">
@@ -11,6 +9,7 @@
 
 	<div class="header">
 		<h1> Welcome, <u>{{uname}}</u>!</h1>
+		<button class="btn" id="logout"><a href = "/logout"> Logout </a></button>
 	</div>
 	
 	
@@ -32,7 +31,7 @@
 	</center>
 
 	<br><br>
-	<button class="btn" id="logout"><a href = "/logout"> Logout </a></button>
+
 	</div>
 </div>
 {% endblock %}
