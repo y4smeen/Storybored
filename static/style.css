@@ -227,8 +227,7 @@ table.bottomBorder th {
 
 .story {
   position: absolute;
-  top: 150px;
-  left: 100px;
+  left:-550px; top:180px; right:0; bottom:0;
 }
 
 .return {
