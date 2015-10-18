@@ -86,15 +86,12 @@ def edit():
         return redirect(url_for("login"))
     elif request.method=="GET":
         return render_template("edit.html")
-    else:        
-        body = request.form["body"]
-        username = session["uname"]
-        sub = request.form["sub"]
+    else:
         title = "<NO TITLE YET>"
         recentid=session["recentid"]
-        #db.update_story_link(0, db.add_story(title, username, body))
-        db.add_story(title, username, body);
-        db.update_story_link(recentid, recentid+1)
+        db.update_story_link(0, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"]))
+        #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
+        #db.update_story_link(recentid, recentid+1)
         session["recentid"]=recentid+1
         return redirect(url_for("story"))
 
@@ -103,10 +100,7 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
-        title = session["title"]
-        username = session["uname"]
-        content_list = db.get_content()
-        return render_template("story.html", title=title, author=username, content_list=content_list)
+        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content())
         
 
 @app.route("/logout/")
