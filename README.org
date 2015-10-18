@@ -1,16 +1,17 @@
-* _Storybored_
+* _StoryBored_
 Bloginator Project, Zamansky 2015
 
-* What is Storybored?
+* What is StoryBored?
 
  Write your stories /on/ our board
+
  /when/ you're bored.
 
- Storybored is a place where people can collaborate to create \\ 
+ Storybored is a place where people can collaborate to create  
 
- stories. People may post starts to stories and other users \\
+ stories. People may post starts to stories and other users 
 
- are able to add lines to these stories. \\
+ are able to add lines to these stories. 
 
 
 * Team Members
