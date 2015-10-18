@@ -34,7 +34,7 @@ def signup():
 
 @app.route("/confirm")
 def confirm():
-    return render_template("confirm.html")
+    return redirect(url_for("login"))
 
 @app.route("/userpage")
 def userpage():
