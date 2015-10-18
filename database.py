@@ -17,8 +17,12 @@ class Database:
         else:
             print " !- Valid database schema. Carry on."
     
-    def add_story(self, title, author, contents):
-        self.c.execute("INSERT INTO stories VALUES(?, ?, ?);", (title, author, contents))
+    def add_story(self, title, author, contents, postid, nextlink):
+        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, author, contents, postid, nextlink))
+        self.db.commit()
+        
+    def update_story(self, postid, nextlink):
+        self.c.execute("UPDATE stories SET nextlink=(?) WHERE postid=(?);",(nextlink, postid))
         self.db.commit()
     
     def add_user(self, username, password):
@@ -31,12 +35,18 @@ class Database:
         self.c.execute("UPDATE users SET password=(?) WHERE username=(?);", (password, username))
         self.db.commit()
     
-    def get_stories(self):
+    def get_titles(self):
         stories = []
         for story in self.c.execute("SELECT title FROM stories").fetchall():
             stories.append(story[0])
         return stories
     
+    def get_content(self):
+        content = []
+        for story in self.c.execute("SELECT contents FROM stories").fetchall():
+            content.append(story[0])
+        return content
+
     def get_users(self):
         users = []
         for user in self.c.execute("SELECT username FROM users").fetchall():

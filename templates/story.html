@@ -5,14 +5,17 @@
 {% block contents %}
 
 <div class="header">
-<h1>Title: {{ title }}</h1>
+<h1>Title: {{title}}</h1>
 <h3>By {{author}}</h3>
 </div>
 
 <div class="story">
 <code>
 <font size="5">
-{{body}}
+{% for item in content_list %}
+"{{item}}"
+<br>
+{% endfor %}
 </font>
 </code>
 </div>
