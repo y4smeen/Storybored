@@ -183,3 +183,10 @@ input[type="password"] {
     right: 0;
     height: 80px;
 }
+
+.book {
+    background-image: url(../static/Book.png);
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+}
