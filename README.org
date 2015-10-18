@@ -1,4 +1,4 @@
-# Storybored
+* _Storybored_
 Bloginator Project, Zamansky 2015
 
 * What is Storybored?
@@ -20,8 +20,8 @@ Bloginator Project, Zamansky 2015
 | Eric Stringham | Middleware Developer     |
 
 * To Do (Pages)
-** DONE Home Page
-** Login Page
-** Main Page
-** Story Page
-** New Post Page
+- +Home Page+
+- Login Page
+- Main Page
+- Story Page
+- New Post Page
