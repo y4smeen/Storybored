@@ -8,14 +8,30 @@ Edit Story
 
 {% block contents %}
 
-<h1>Add a line to Story</h1>
-<form method="POST">
-  <textarea type="text" name="body" maxlength="256" placeholder="Enter text here..."></textarea>
+<div class="sidebar">
+  <br><br><br><br>
+  <h3>{{uname}}</h3>
+  <h3>Your Posts</h3>
+</div>
+
+<div class="header"></div>
+<div class="headtext">
+  <h1 class="headtext"> Welcome, <u>{{uname}}</u>!</h1>
+  <a href="/logout" class="btn" style="float: right"> Logout </a>
+</div>
+
+
+<div class="main">
+
+  <h1>Add a line to Story</h1>
+  <form method="POST">
+    <textarea type="text" name="body" maxlength="256" placeholder="Enter text here..."></textarea>
+    <br>
+    <input type="submit" name="sub" value="Submit" class="btn">
+  </form>
   <br>
-  <input type="submit" name="sub" value="Submit" class="btn">
-</form>
-<br>
-<button class="btn"><a href="/userpage">Back to the Main Page</a></button>
-<button class="btn"><a href="/logout">Logout</a></button>
+  <button class="btn"><a href="/userpage">Back to the Main Page</a></button>
+  <button class="btn"><a href="/logout">Logout</a></button>
+</div>
 
 {% endblock %}
