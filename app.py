@@ -76,7 +76,7 @@ def newpost():
         session["title"] = title
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
-        session["recentid"]=0
+        session["recentid"]=1
         db.add_story(title, session["user"], body)
         return redirect(url_for("story"))
 
@@ -89,7 +89,7 @@ def edit():
     else:
         title = "<NO TITLE YET>"
         recentid=session["recentid"]
-        db.update_story_link(0, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"]))
+        db.update_story_link(recentid, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"]))
         #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
         #db.update_story_link(recentid, recentid+1)
         session["recentid"]=recentid+1
