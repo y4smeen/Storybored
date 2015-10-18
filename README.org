@@ -29,3 +29,6 @@ Bloginator Project, Zamansky 2015
 - Main Page
 - Story Page
 - New Post Page
+
+* Timeline
+<2015-10-16 Fri> something
