@@ -50,7 +50,8 @@ class Database:
         self.db = db = sqlite3.connect(database, check_same_thread=False)
         self.c = c = db.cursor()
         print " !- Connecting to databse'" + database + "'..."
-        if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != format_schema(schema):
+        schema = format_schema(schema)
+        if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
             print " !- Invalid database schema! Dropping everything and recreating."
             for table in c.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall():
                 print " !-- Dropping table " + table[0] + "..."
@@ -61,12 +62,13 @@ class Database:
         else:
             print " !- Valid database schema. Carry on."
     
-    def add_story(self, title, author, contents, postid, nextlink):
-        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, author, contents, postid, nextlink))
+    def add_story(self, title, author, contents):
+        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?);", (title, author, contents, -1))
         self.db.commit()
+        return self.c.lastrowid
         
-    def update_story(self, postid, nextlink):
-        self.c.execute("UPDATE stories SET nextlink=(?) WHERE postid=(?);",(nextlink, postid))
+    def update_story_link(self, story, link):
+        self.c.execute("UPDATE stories SET link=(?) WHERE rowid=(?);", (link, story))
         self.db.commit()
     
     def add_user(self, username, password):

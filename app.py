@@ -6,10 +6,9 @@ DATABASE = './database.db'
 SCHEMA = [
     ('stories', [
         ('title', 'text'),
-        ('author', 'text'),
+        ('author', 'int'),
         ('contents', 'text'),
-        ('postid', 'int'),
-        ('nextlink', 'int'),
+        ('link', 'int'),
     ]),
     ('users', [
         ('username', 'text'),
@@ -18,7 +17,6 @@ SCHEMA = [
 ]
 
 db = Database(DATABASE, SCHEMA)
-postid = 0
 
 app = Flask(__name__)
 @app.route('/')
@@ -80,7 +78,7 @@ def newpost():
         session["title"] = title
         session["body"] = body
         session["author"] = username
-        db.add_story(title, username, body, postid, -1)
+        db.add_story(title, username, body)
         return redirect(url_for("story"))
 
 @app.route("/edit", methods=["GET","POST"])
@@ -90,15 +88,11 @@ def edit():
     elif request.method=="GET":
         return render_template("edit.html")
     else:        
-        oldid = postid
-        newid = postid+1
-        db.update_story(oldid,newid)
-                
         body = request.form["body"]
         username = session["uname"]
         sub = request.form["sub"]
-        title = ""
-        db.add_story(title, username, body, newid, -1)
+        title = "<NO TITLE YET>"
+        db.update_story_link(0, db.add_story(title, username, body))
         return redirect(url_for("story"))
 
 @app.route("/story")
