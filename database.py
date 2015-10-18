@@ -1,6 +1,7 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
-class database:
+class Database:
     def __init__(self, database, schema):
         self.db = db = sqlite3.connect(database)
         self.c = c = db.cursor()
@@ -20,15 +21,29 @@ class database:
         self.c.execute("INSERT INTO stories VALUES(?, ?, ?);", (title, author, contents))
         self.db.commit()
     
+    def add_user(self, username, password):
+        password = generate_password_hash(password)
+        self.c.execute("INSERT INTO users VALUES(?, ?);", (username, password))
+        self.db.commit()
+
+    def update_user_password(self, username, new_password):
+        password = generate_password_hash(new_password)
+        self.c.execute("UPDATE users SET password=(?) WHERE username=(?);", (password, username))
+        self.db.commit()
+    
     def get_stories(self):
         stories = []
         for story in self.c.execute("SELECT title FROM stories").fetchall():
             stories.append(story[0])
         return stories
+    
+    def get_users(self):
+        users = []
+        for user in self.c.execute("SELECT username FROM users").fetchall():
+            users.append(user[0])
+        return users
 
-# Example Usage:
-# 
-# import database from database
-# db = database()
-# db.addstory("Test", "Guy", "Thing")
-# db.get_stories()
+    def check_user_password(self, username, password):
+        password_hash = self.c.execute("SELECT password FROM users WHERE username=(?);", (username,)).fetchall()[0][0]
+        return check_password_hash(password_hash, password)
+    
