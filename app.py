@@ -90,17 +90,18 @@ def edit():
         sub = request.form["sub"]
         title = ""
         db.add_story(title, username, body, newid, -1)
-        content_list = db.get_content()
-        return render_template("story.html", title=title, author=username, content_list=content_list)
-        #return redirect(url_for("edit"))
+        return redirect(url_for("story"))
 
 @app.route("/story")
 def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
-        return render_template("story.html")
-
+        title = session["title"]
+        username = session["uname"]
+        content_list = db.get_content()
+        return render_template("story.html", title=title, author=username, content_list=content_list)
+        
 
 @app.route("/logout")
 def logout():
