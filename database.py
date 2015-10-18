@@ -19,7 +19,6 @@ Schemas should be formatted as follows:
         ]),
         ...
     ]
-
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,7 +44,6 @@ class Database:
         If the database's schema does not match the one provided by the schema
         statement, all of the database's tables will be dropped and it will be
         recrated with the appropriate tables and data.
-        
         """
         self.db = db = sqlite3.connect(database, check_same_thread=False)
         self.c = c = db.cursor()
@@ -63,7 +61,7 @@ class Database:
             print " !- Valid database schema. Carry on."
     
     def add_story(self, title, author, contents):
-        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?);", (title, author, contents, -1))
+        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?);", (title, str(author), contents, -1))
         self.db.commit()
         return self.c.lastrowid
         
@@ -91,8 +89,13 @@ class Database:
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
 
     def check_user_password(self, username, password):
-        password_hash = self.c.execute("SELECT password FROM users WHERE username=(?);", (username,)).fetchall()[0][0]
-        return check_password_hash(password_hash, password)
+        dat = self.c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
+        if dat and check_password_hash(dat[1], password):
+            return dat[0]
+        return 0;
+    
+    def get_user_by_id(self, userid):
+        return self.c.execute("SELECT username FROM users WHERE rowid=(?);", str(userid)).fetchone()[0] 
 
 def parse_simple_selection(output):
     members = []
