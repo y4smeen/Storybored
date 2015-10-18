@@ -138,6 +138,7 @@ textarea {
     height: 100px;
     padding: 1%;
     border: none;
+    resize: none;
 }
 
 input[type="password"] {
@@ -238,4 +239,9 @@ table.bottomBorder th {
 
 .blogo {
     max-width:31%;
+}
+
+.title {
+    width: 20%;
+    height: 25px;
 }
