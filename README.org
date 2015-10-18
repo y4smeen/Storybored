@@ -59,4 +59,6 @@ Bloginator Project, Zamansky 2015
 | October 17, Saturday, 2015 | Designed userpage and animated effects           |
 |                            | General animation detailing & editing            |
 |                            | Started working with databases                   |
+|                            | Allowed users to make new accounts               |
+|                            | Allowed users to log in with said accounts       |
 | October 18, Sunday, 2015   |                                                  |
