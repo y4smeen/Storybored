@@ -3,10 +3,10 @@ Bloginator Project, Zamansky 2015
 
 * What is Storybored?
 
-#+BEGIN_VERSE
-Write your stories /on/ our board
-#+END_VERSE
+#+BEGIN_CENTER
+Write your stories /on/ our board //
 /when/ you're bored.
+#+END_CENTER
 
 * Team Members
 
