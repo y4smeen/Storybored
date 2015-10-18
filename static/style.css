@@ -139,7 +139,7 @@ input[type="password"] {
 }
 
 .error {
-    background-color: #c0392b;
+    background-color: #e74c3c;
     color: WHITE;
     border-radius: 1em;
     box-shadow: 0.5em 0.5em 0.25em rgba(0, 0, 0, 0.2);
