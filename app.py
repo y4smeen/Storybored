@@ -62,9 +62,11 @@ def newpost():
         print("sending post stuff through")
         title = request.form["title"]
         body = request.form["body"]
+        username = session["uname"]
         sub = request.form["sub"]
         session["title"] = title
         session["body"] = body
+        session["author"] = username
         return redirect(url_for("story"))
 
 @app.route("/story")
@@ -74,7 +76,8 @@ def story():
     else:
         title = session["title"]
         body = session["body"]
-        return render_template("story.html",title=title, body=body)
+        author = session["author"]
+        return render_template("story.html",title=title, author=author, body=body)
 
 @app.route("/edit", methods=["GET","POST"])
 def edit():
