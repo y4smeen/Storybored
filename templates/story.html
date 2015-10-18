@@ -4,28 +4,44 @@
 
 {% block contents %}
 
-<div class="header">
-<h1>Title: {{title}}</h1>
-<h3>By {{author}}</h3>
+<div class="container">
+  <div class="sidebar">
+    <br><br><br><br>
+    <h3>{{uname}}</h3>
+    <h3>Your Posts</h3>
+  </div>
+  
+  <div class="header"></div>
+  <div class="headtext">
+    <h1 class="headtext">{{ title }}</h1>
+   <a href="/logout" class="btn" style="float: right"> Logout </a>
+  </div>
+  
+  
+  <div class="main">
+    <h3>By {{author}}</h3>
+    </div>
+    
+    <div class="story">
+      <code>
+	<font size="5">
+	  {% for item in content_list %}
+	  "{{item}}"
+	  <br>
+	  <br>
+	  {% endfor %}
+	</font>
+      </code>
+    </div>
+    
+    <div class="return">
+      <table border="1" cellpadding="200">
+	<tr><button class="btn"><a href="/edit">Add to this story</a></button></tr>
+	<tr><button class="btn"><a href="/userpage">Back to the Main Page</a></button></tr>
+	<tr><button class="btn"><a href="/logout">Logout</a></button></tr>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div class="story">
-<code>
-<font size="5">
-{% for item in content_list %}
-"{{item}}"
-<br>
-<br>
-{% endfor %}
-</font>
-</code>
-</div>
-
-<div class="return">
-<table border="1" cellpadding="200">
-<tr><button class="btn"><a href="/edit">Add to this story</a></button></tr>
-<tr><button class="btn"><a href="/userpage">Back to the Main Page</a></button></tr>
-<tr><button class="btn"><a href="/logout">Logout</a></button></tr>
-</table>
-</div>
 {% endblock %}

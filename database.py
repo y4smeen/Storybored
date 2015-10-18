@@ -68,6 +68,10 @@ class Database:
     def update_story_link(self, story, link):
         self.c.execute("UPDATE stories SET link=(?) WHERE rowid=(?);", (link, story))
         self.db.commit()
+
+    def get_next_rowid(self):
+        return self.c.execute("select max(rowid) from stories;")
+        #self.db.commit()
     
     def add_user(self, username, password):
         password = generate_password_hash(password)

@@ -47,6 +47,7 @@ def signup():
     if request.method=="GET":
         return render_template("signup.html")
     else:
+        session["uname"] = request.form["user"]
         db.add_user(request.form["user"], request.form["pass"])
         return redirect(url_for("confirm"))
 
@@ -75,6 +76,7 @@ def newpost():
         session["title"] = title
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
+        session["recentid"]=1
         db.add_story(title, session["user"], body)
         return redirect(url_for("story"))
 
@@ -84,12 +86,13 @@ def edit():
         return redirect(url_for("login"))
     elif request.method=="GET":
         return render_template("edit.html")
-    else:        
-        body = request.form["body"]
-        username = session["uname"]
-        sub = request.form["sub"]
+    else:
         title = "<NO TITLE YET>"
-        db.update_story_link(0, db.add_story(title, username, body))
+        recentid=session["recentid"]
+        db.update_story_link(recentid, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"]))
+        #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
+        #db.update_story_link(recentid, recentid+1)
+        session["recentid"]=recentid+1
         return redirect(url_for("story"))
 
 @app.route("/story/")
@@ -97,10 +100,10 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
-        title = session["title"]
-        username = session["uname"]
-        content_list = db.get_content()
-        return render_template("story.html", title=title, author=username, content_list=content_list)
+        print(db.get_content())
+        print(len(db.get_content()))
+        print()
+        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content())
         
 
 @app.route("/logout/")
