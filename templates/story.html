@@ -25,9 +25,8 @@
     <div class="story">
       <code>
 	<font size="5">
-	  {% for item in content_list %}
-	  "{{item}}"
-	  <br>
+	  {% for n in range(0,length) %}
+	  {{author_list[n]}}: {{content_list[n]}}
 	  <br>
 	  {% endfor %}
 	</font>

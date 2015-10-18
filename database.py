@@ -89,6 +89,10 @@ class Database:
     def get_content(self):
         return parse_simple_selection(self.c.execute("SELECT contents FROM stories;").fetchall())
 
+    def get_authors(self):
+        return parse_simple_selection(self.c.execute("SELECT author FROM stories;").fetchall())
+
+
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
 

@@ -102,8 +102,9 @@ def story():
     else:
         print(db.get_content())
         print(len(db.get_content()))
+        print(db.get_users())
         print()
-        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content())
+        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content(), author_list = db.get_authors(), length = len(db.get_content()))
         
 
 @app.route("/logout/")
