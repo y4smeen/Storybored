@@ -8,12 +8,9 @@ Story
 
 {% block contents %}
 
-<h1> You are reading a story </h1>
+<h1>{{ title }}</h1>
 
-<br>
-Title: {{title}}
-<br>
-Body: {{body}}
+{{body}}
 <br>
 <button class="btn"><a href="/edit">Add to this story</a></button>
 <br>
