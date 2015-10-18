@@ -3,7 +3,7 @@ import sqlite3
 
 class Database:
     def __init__(self, database, schema):
-        self.db = db = sqlite3.connect(database)
+        self.db = db = sqlite3.connect(database, check_same_thread=False)
         self.c = c = db.cursor()
         print " !- Connecting to databse'" + database + "'..."
         if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
