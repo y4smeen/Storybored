@@ -71,7 +71,6 @@ def posts():
     body = session["body"]
     return render_template("posts.html",title=title, body=body)
 
-
 @app.route("/story")
 def story():
     if session["logged"]==0:
