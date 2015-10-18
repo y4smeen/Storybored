@@ -8,18 +8,27 @@ Log In
 
 {% block contents %}
 
-<h1>Log in to Storybored</h1>
+<div class="loginheader"><h1>Log in to Storybored</h1></div>
+<div class="loginbody">
 {% if error %}
 <div class="error">
   <h3>{{error}}</h3>
 </div>
 {% endif %}
 <br><br>
+
 <form method="POST">
-  Username: <input type="text" name="username" placeholder="Username">
-  <br><br>
-  Password: <input type="password" name="password" placeholder="Password">
-  <br><br>
+<table align="center" cellpadding="25" class="loginborder" bgcolor="#f1c40f">
+<tr>
+  <td><label style="display:block" for="username"><p>Username:</p></label></td>
+  <td><input type="text" name="username" placeholder="Username"/></td>
+</tr>
+<tr>
+   <td><label style="display:block" for="password"><p>Password:</p></label></td>
+   <td><input type="password" name="password" placeholder="Password"/></td>
+</tr>
+</table>
+<br>
   <input type="submit" name="sub" value="Log in" class="btn">
   <input type="submit" name="sub" value="Cancel" class="btn">
 </form>
@@ -28,5 +37,5 @@ Log In
 <br><br>
 <br><br>
 <button class="btn"><a href="/home">Back to the Home Page</a></button>
-
+</div>
 {% endblock%}
