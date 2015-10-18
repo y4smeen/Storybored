@@ -3,7 +3,10 @@ from database import Database
 import user
 
 DATABASE = './database.db'
-SCHEMA = [(u'CREATE TABLE stories (title text, author text, contents text)',)]
+SCHEMA = [
+    (u'CREATE TABLE stories (title text, author text, contents text)',),
+    (u'CREATE TABLE users (username text, password blob)',)
+    ]
 
 db = Database(DATABASE, SCHEMA)
 
