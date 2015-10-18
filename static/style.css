@@ -1,21 +1,11 @@
 /* ----- NORMAL FORMATTING -----*/
-
-
-
-
-/* ----- HOMEPAGE SPECIFIC FORMATTING ----- */
 body {
     margin: 0 0;
-    padding-top: 100px;
+    
     background-color: #1abc9c;
     color: #ffffff;
     text-align: center;
     font-family: "Helvetica Neue", Helvectia, sans-serif;
-}
-
-.index #logo {
-    width: 250px;
-    height: 250px;
 }
 
 .btn {
@@ -35,6 +25,15 @@ body {
     border-radius: 3px;
     font-weight: bold;
 }
+
+
+/* ----- HOMEPAGE SPECIFIC FORMATTING ----- */
+
+.index #logo {
+    width: 250px;
+    height: 250px;
+}
+
 
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -89,6 +88,7 @@ a {
 
 .wrapper {
     /*padding-top: 20px;*/
+    padding-top: 100px;
     background-color:#1abc9c;
     min-height: 100%;
 }
@@ -138,15 +138,6 @@ input[type="password"] {
     padding: 1%;
 }
 
-.error {
-    background-color: #e74c3c;
-    color: WHITE;
-    border-radius: 1em;
-    box-shadow: 0.5em 0.5em 0.25em rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    margin: 0.5em auto;
-    padding: 0.5em 1em;
-}
 /* ----- USERPAGE SPECIFIC FORMATTING ----- */
 
 .header {
@@ -171,3 +162,13 @@ input[type="password"] {
   padding: 10px 10px 10px;
   display: inline-block;
  }
+
+.error {
+    background-color: #e74c3c;
+    color: WHITE;
+    border-radius: 1em;
+    box-shadow: 0.5em 0.5em 0.25em rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    margin: 0.5em auto;
+    padding: 0.5em 1em;
+}
