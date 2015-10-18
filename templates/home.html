@@ -1,138 +1,61 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>StoryBored</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-
-html, body {
-	margin: 0 0;
-	height: 100%;
-	color:white;
-	text-align: center;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-p{	margin: 0 !important;	}
-
-.wrapper {
-	padding-top: 50px;
-	background-color:#1abc9c;
-	min-height: 100%;
-}
-.how {
-	padding-top: 50px;
-	background-color: #f1c40f;
-	min-height: 100%;
-}
-
-.team {
-	padding-top: 50px;
-	background-color: #9b59b6;
-	min-height: 100%;
-	color: white;
-}
-
-.button {
-    color: white;
-    background: #e74c3c;
-   	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-   	border: none;
-    line-height: 22px;
-    padding: 10px 30px 10px;
-    text-align: center;
-    display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 18px;
-    text-decoration: none;
-    	-webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-.fade-in {
-  	opacity:0;  
-  	-webkit-animation:fadeIn ease-in 1; 
-	-moz-animation:fadeIn ease-in 1;
-	animation:fadeIn ease-in 1;
-
-	-webkit-animation-fill-mode:forwards;  
-	-moz-animation-fill-mode:forwards;
-	animation-fill-mode:forwards;
-
-	-webkit-animation-duration:1.5s;
-	-moz-animation-duration:1.5s;
-	animation-duration:1.5s;
-
-	-webkit-animation-delay: 0.2s;
-	-moz-animation-delay: 0.2s;
-	animation-delay: 0.2s;
-}
-.alignleft { 
-	float: left;
-	padding-left: 10px;
-	width: 100%;
-}
-
-</style>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block contents %}
+<!-- Note: Personally, would try to avoid fixed sizes, in pixels especially.
+           that being said, this is an index page, so the rules are different. 
+  -->
 <div class="wrapper">
-	<img src="../static/ebook_circle.png" alt="storyboardlogo" width="250" height="250"/>
-	<div class="fade-in">
-		<center><p style="font-size: 100px; line-height: 200%; width: 33%">StoryBored</p>
-		<p style="font-size: 20px; line-height: 25%; line-width: 33%">Where you come to write stories <i>on</i> our board</p><br><p style="font-size: 20px; line-width: 33%"><i>when</i> you're bored.</p></center>
-	</div>
-	<br>
-	<a class="button" href="/login">LOGIN</a>
-	<br><br>
-	<a href="#credits"><img src="../static/down-caret.png" alt="more" height="40"/></a>
+<img id="logo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo">
+<div class="fade-in title">
+    <span style="font-size:100px;line-height:200%">StoryBored</span>
 </div>
+<div class="fade-in description">
+    <p style="font-size:20px;margin-top:-10px;line-height:30px;">Where you come to write stories <i>on</i> our board<br/>
+    <i>when</i> you're bored.</p>
+</div>
+<a class="btn" href="/login">LOGIN</a>
+<br><br>
+<a href="#credits"><img src="../static/down-caret.png" alt="Credits" height="40"></a>
 <div class="how">
-	<table>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-	</table>
+  <table align="center" cellpadding="30">
+    <tr>
+      <td><img id="logo" src="../static/Pensils.png" alt="storyboredlogo" height="200"></td>
+      <td><p style="font-size:30px;">Collaborative Writing</p></td>
+    </tr>
+    <tr>
+      <td><img id="logo" src="../static/Book.png" alt="storyboredlogo" height="200"></td>
+      <td><p style="font-size:30px;">Create Stories</p></td>
+    </tr>
+    <tr>
+      <td><img id="logo" src="../static/Infinity-Loop.png" alt="storyboredlogo" height="200"></td>
+     <td><p style="font-size:30px;">Infinite Possibilities</p></td>
+   </tr>
+  </table>
 </div>
 <div class="team" id="credits">
-	<p style="font-size: 80px; line-height: 200%">Our Team</p>
-
-	<table align="center" cellpadding="15">
-	<tr><td class="credits">TEAM LEADER</td></tr>	
-		<tr>
-			<td><img src="../static/angela.png" alt="more" height="40"/></td>
-			<td>Angela Chan</td>
-		</tr>
-	<tr><td class="credits">USER EXPERIENCE DESIGNER</td></tr>	
-		<tr>
-			<td><img src="../static/amanda.png" alt="more" height="40"/></td>
-			<td>Amanda Chiu</td>
-		</tr>
-	<tr><td class="credits">BACKEND DEVELOPER</td></tr>	
-		<tr>
-			<td><img src="../static/leon.png" alt="more" height="40"/></td>
-			<td>Leon Cheng</td>
-		</tr>
-	<tr><td class="credits">MIDDLEWARE DEVELOPER</td></tr>	
-		<tr>
-			<td><img src="../static/eric.png" alt="more" height="40"/></td>
-			<td>Eric Stringham</td>
-		</tr>
-	</table>
-	<p class="alignleft team">© Zamansky Period 7 Fall 2015</p>
+  <p style="font-size:80px; line-height: 200%">Our Team</p>
+  <table align="center" cellpadding="15">
+    <tr><td colspan="2" align="center">TEAM LEADER</td></tr>
+    <tr>
+      <td><img src="../static/angela.png" alt="Leader" height="40"></td>
+      <td>Angela Chan</td>
+    </tr>
+    <tr><td colspan="2" align="center">USER EXPERIENCE DESIGNER</td></tr>
+    <tr>
+      <td><img src="../static/amanda.png" alt="UX" height="40"></td>
+      <td>Amanda Chiu</td>
+    </tr>
+    <tr><td colspan="2" align="center">BACKEND DEVELOPER</td></tr>
+    <tr>
+      <td><img src="../static/leon.png" alt="backend"></td>
+      <td>Leon Cheng</td>
+    </tr>
+    <tr><td colspan="2" align="center">MIDDLEWARE DEVELOPER</td></tr>
+    <tr>
+      <td><img src="../static/eric.png" alt="middleware" height="40"></td>
+      <td>Eric Stringham</td>
+    </tr>
+  </table>
+  <p class="alignleft team">Zamansky Period 7 Fall 2015</p>
 </div>
-
-</body>
-
-</html>
+{% endblock %}
