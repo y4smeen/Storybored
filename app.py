@@ -100,6 +100,9 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
+        print(db.get_content())
+        print(len(db.get_content()))
+        print()
         return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content())
         
 
