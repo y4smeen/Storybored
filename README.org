@@ -4,9 +4,9 @@ Bloginator Project, Zamansky 2015
 * What is Storybored?
 
 **************** Write your stories /on/ our board 
-**************** /when/ you're bored. \\
-**************** Storybored is a place where people can collaborate to create \\
-**************** stories. People may post starts to stories and other users \\
+**************** /when/ you're bored. 
+**************** Storybored is a place where people can collaborate to create 
+**************** stories. People may post starts to stories and other users
 **************** are able to add lines to these stories.
 
 
@@ -20,8 +20,8 @@ Bloginator Project, Zamansky 2015
 | Eric Stringham | Middleware Developer     |
 
 * To Do (Pages)
-- +Home Page+
-- Login Page
-- Main Page
-- Story Page
-- New Post Page
+** DONE +Home Page+
+** Login Page
+** Main Page
+** Story Page
+** New Post Page
