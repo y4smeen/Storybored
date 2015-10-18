@@ -54,8 +54,23 @@ def userpage():
 def newpost():
     if session["logged"]==0:
         return redirect(url_for("login"))
-    else:
+    elif request.method=="GET":
         return render_template("newpost.html")
+    else:
+        print("sending post stuff through")
+        title = request.form["title"]
+        body = request.form["body"]
+        sub = request.form["sub"]
+        session["title"] = title
+        session["body"] = body
+        return redirect(url_for("posts"))
+
+@app.route("/posts")
+def posts():
+    title = session["title"]
+    body = session["body"]
+    return render_template("posts.html",title=title, body=body)
+
 
 @app.route("/story")
 def story():
