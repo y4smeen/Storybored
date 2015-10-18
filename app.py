@@ -1,12 +1,21 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from database import Database
+from database import Database, format_schema
 import user
 
 DATABASE = './database.db'
 SCHEMA = [
-    (u'CREATE TABLE stories (title text, author text, contents text, postid int, nextlink int)',),
-    (u'CREATE TABLE users (username text, password blob)',)
-    ]
+    ('stories', [
+        ('title', 'text'),
+        ('author', 'text'),
+        ('contents', 'text'),
+        ('postid', 'int'),
+        ('nextlink', 'int'),
+    ]),
+    ('users', [
+        ('username', 'text'),
+        ('password', 'blob'),
+    ]),
+]
 
 db = Database(DATABASE, SCHEMA)
 postid = 0
