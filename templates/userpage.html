@@ -3,35 +3,36 @@
 {% block contents %}
 
 <div class="container">
-	<div class="sidebar">
-		<p style="font-size:10">Sidebar</p>
-	</div>
-
-	<div class="header">
-		<h1> Welcome, <u>{{uname}}</u>!</h1>
-		<button class="btn" id="logout"><a href = "/logout"> Logout </a></button>
-	</div>
-	
-	
-	<div class="main">
-	<button class="btn"><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
-	<center>
-	<table>
-	   <tr>
-	     <td class=cell><a href="{{url_for('story')}}">
-		 Hello
-		 </a>
-		 <br>
-		 by
-		 <br>
-		 Author
-	     </td>
-	   </tr>
-	</table>
-	</center>
-
-	<br><br>
-
-	</div>
+  <div class="sidebar">
+    <p style="font-size:10">Sidebar</p>
+  </div>
+  
+  <div class="header"></div>
+  <div class="headtext">
+    <h1 class="headtext"> Welcome, <u>{{uname}}</u>!</h1>
+    <button class="btn" id="logout"><a href = "/logout"> Logout </a></button>
+  </div>
+  
+  
+  <div class="main">
+    <button class="btn"><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
+    <center>
+      <table>
+	<tr>
+	  <td class=cell><a href="{{url_for('story')}}">
+	      Hello
+	    </a>
+	    <br>
+	    by
+	    <br>
+	    Author
+	  </td>
+	</tr>
+      </table>
+    </center>
+    
+    <br><br>
+    
+  </div>
 </div>
 {% endblock %}
