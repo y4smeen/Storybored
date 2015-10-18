@@ -13,14 +13,14 @@ Log In
   <br><br>
   Password: <input type="text" name="password">
   <br><br>
-  <input type="submit" name="sub" value="Log in">
-  <input type="submit" name="sub" value="Cancel">
+  <input type="submit" name="sub" value="Log in" class="btn">
+  <input type="submit" name="sub" value="Cancel" class="btn">
 </form>
 <br>
-<button><a href="{{url_for('signup')}}">Sign Up</a></button>
+<button class="btn"><a href="{{url_for('signup')}}">Sign Up</a></button>
 <br><br>
 DEVELOPER's NOTE: type any username, password = "pass" to sign in
 <br><br>
-<button><a href="/home">Back to the Home Page</a></button>
+<button class="btn"><a href="/home">Back to the Home Page</a></button>
 
 {% endblock%}
