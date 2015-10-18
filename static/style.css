@@ -126,3 +126,12 @@ textarea {
     padding: 1%;
     border: none;
 }
+
+input[type="password"] {
+    padding: 1%;
+    border: none;
+}
+
+::-webkit-input-placeholder {
+    padding: 1%;
+}
