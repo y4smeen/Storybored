@@ -4,11 +4,12 @@ import user
 
 DATABASE = './database.db'
 SCHEMA = [
-    (u'CREATE TABLE stories (title text, author text, contents text)',),
+    (u'CREATE TABLE stories (title text, author text, contents text, postid int, nextlink int)',),
     (u'CREATE TABLE users (username text, password blob)',)
     ]
 
 db = Database(DATABASE, SCHEMA)
+postid = 0
 
 app = Flask(__name__)
 @app.route('/')
@@ -62,7 +63,7 @@ def newpost():
     elif request.method=="GET":
         return render_template("newpost.html")
     else:
-        print("sending post stuff through")
+        #print("sending post stuff through")
         title = request.form["title"]
         body = request.form["body"]
         username = session["uname"]
@@ -70,17 +71,8 @@ def newpost():
         session["title"] = title
         session["body"] = body
         session["author"] = username
+        db.add_story(title, username, body, postid, -1)
         return redirect(url_for("story"))
-
-@app.route("/story")
-def story():
-    if session["logged"]==0:
-        return redirect(url_for("login"))
-    else:
-        title = session["title"]
-        body = session["body"]
-        author = session["author"]
-        return render_template("story.html",title=title, author=author, body=body)
 
 @app.route("/edit", methods=["GET","POST"])
 def edit():
@@ -89,7 +81,25 @@ def edit():
     elif request.method=="GET":
         return render_template("edit.html")
     else:
-        return redirect(url_for("story"))
+        oldid = postid
+        newid = postid+1
+        db.update_story(oldid,newid)
+                
+        body = request.form["newline"]
+        username = session["uname"]
+        sub = request.form["sub"]
+        db.add_story(title, username, body, newid, -1)
+        content_list = db.get_content
+        return redirect(url_for("story"), title=title, author=username, content_list=content_list)
+
+
+@app.route("/story")
+def story():
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    else:
+        return render_template("story.html")
+
 
 @app.route("/logout")
 def logout():
