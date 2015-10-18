@@ -58,6 +58,15 @@ def story():
     else:
         return render_template("story.html")
 
+@app.route("/edit", methods=["GET","POST"])
+def edit():
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    elif request.method=="GET":
+        return render_template("edit.html")
+    else:
+        return redirect(url_for("story"))
+
 @app.route("/logout")
 def logout():
     session["username"]=""

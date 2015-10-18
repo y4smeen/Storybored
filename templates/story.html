@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 
+{% block title %}
+
+Story
+
+{% endblock %}
+
 {% block contents %}
 
 <h1> You are reading a story </h1>
 
+<button class="btn"><a href="/edit">Add to this story</a></button>
+<br>
 <button class="btn"><a href="/userpage">Back to the Main Page</a></button>
 <br>
-<button class="btn"><a href="/login">Logout</a></button>
+<button class="btn"><a href="/logout">Logout</a></button>
 
 {% endblock %}
