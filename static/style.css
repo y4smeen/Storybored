@@ -104,7 +104,8 @@ p {
 }
 
 .team {
-    padding-top: 50px;
+    padding-top:5%;
+    padding-bottom: 5%;
     background-color: #9b59b6;
     min-height: 100%;
     color: white;
