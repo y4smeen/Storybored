@@ -8,8 +8,8 @@ class Database:
         print " !- Connecting to databse'" + database + "'..."
         if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
             print " !- Invalid database schema! Dropping everything and recreating."
-            for table in c.execute("SELECT name FROM sqlite_master WHERE type='table';"):
-                print " !-- Dropping table " + table + "..."
+            for table in c.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall():
+                print " !-- Dropping table " + table[0] + "..."
                 c.execute("DROP TABLE " + table[0] + ";")
             for statement in schema:
                 print " !-- Execute: (" + statement[0] + ";)"
