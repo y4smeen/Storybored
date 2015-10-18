@@ -21,8 +21,10 @@ def login():
     else:
         uname = request.form["username"]
         pword = request.form["password"]
-        sub      = request.form["sub"]
-        if user.authenticate(uname, pword):
+        sub   = request.form["sub"]
+        if request.form["sub"]=="Cancel":
+            return render_template("login.html")
+        elif user.authenticate(uname, pword):
             session["uname"]=uname
             session["logged"]=1
             return redirect(url_for("userpage"))
