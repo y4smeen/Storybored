@@ -30,6 +30,18 @@ Bloginator Project, Zamansky 2015
 - Story Page
 - New Post Page
 
+* To Do (Functions)
+- Make log in
+- Make sign up
+- Allow to make new posts
+- Allow to edit existing posts
+- Allow to delete old posts
+- Allow to delete old lines
+- Create a profile that shows only your posts
+- Create other people's profiles
+- Create a search bar
+- Make it so only people with permission can edit posts
+
 * Timeline
 - <2015-10-09 Fri> Initial Commit
 - <2015-10-11 Sun> Home Page Design
