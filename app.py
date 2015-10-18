@@ -68,7 +68,8 @@ def newpost():
     if session["logged"]==0:
         return redirect(url_for("login"))
     elif request.method=="GET":
-        return render_template("newpost.html")
+        username = db.get_user_by_id(session["user"])
+        return render_template("newpost.html", uname=username)
     else:
         #print("sending post stuff through")
         title = request.form["title"]
@@ -85,7 +86,8 @@ def edit():
     if session["logged"]==0:
         return redirect(url_for("login"))
     elif request.method=="GET":
-        return render_template("edit.html")
+        username = db.get_user_by_id(session["user"])
+        return render_template("edit.html", uname=username)
     else:
         title = "<NO TITLE YET>"
         recentid=session["recentid"]
@@ -100,6 +102,7 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
+        username = db.get_user_by_id(session["user"])
         print(db.get_content())
         print(len(db.get_content()))
         print(db.get_users())
