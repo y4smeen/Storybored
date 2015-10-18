@@ -28,11 +28,11 @@ Bloginator Project, Zamansky 2015
 - Login Page
 - Main Page
 - Story Page
-- New Post Page
+- +New Post Page+
 
 * To Do (Functions)
-- Make log in
-- Make sign up
+- +Make log in+
+- +Make sign up+
 - Allow to make new posts
 - Allow to edit existing posts
 - Allow to delete old posts
@@ -59,4 +59,4 @@ Bloginator Project, Zamansky 2015
 | October 17, Saturday, 2015 | Designed userpage and animated effects           |
 |                            | General animation detailing & editing            |
 |                            | Started working with databases                   |
-|                            |                                                  |
+| October 18, Sunday, 2015   |                                                  |
