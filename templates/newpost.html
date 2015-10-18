@@ -8,13 +8,23 @@ Create a New Post
 
 {% block contents %}
 
-<h1> Create a new post </h1>
+<div class="container">
+  <div class="sidebar">
+    <br><br><br><br>
+    <h3>{{ uname  }}</h3>
+    <h3>Your Posts</h3>
+  </div>
 
-<br>
+  <div class="header"></div>
+  <div class="headtext">
+    <h1 class="headtext"> Create a new post </h1>
+    <a href="/logout" class="btn" style="float: right"> Logout </a>
+  </div>
+<div class="main">
 
 <form method="POST">
-  <h3>Title:</h3> 
-  <input type="text" name="title" placeholder="Title">
+  <h3>Title (maximum 256 characters)</h3> 
+  <textarea type="text" name="title" placeholder="Title" class="title"></textarea>
   <br><br><br>
   <h3>Body (maximum 256 characters)</h3>
   <textarea type="text" name="body" maxlength="256" placeholder="Enter text here..."></textarea>
@@ -29,6 +39,6 @@ Create a New Post
 
 <br><br>
 
-<button class="btn"><a href="/logout"> Log Out </a></button>
+</div>
 
 {% endblock %}
