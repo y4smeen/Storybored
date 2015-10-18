@@ -80,18 +80,19 @@ def edit():
         return redirect(url_for("login"))
     elif request.method=="GET":
         return render_template("edit.html")
-    else:
+    else:        
         oldid = postid
         newid = postid+1
         db.update_story(oldid,newid)
                 
-        body = request.form["newline"]
+        body = request.form["body"]
         username = session["uname"]
         sub = request.form["sub"]
+        title = ""
         db.add_story(title, username, body, newid, -1)
-        content_list = db.get_content
-        return redirect(url_for("story"), title=title, author=username, content_list=content_list)
-
+        content_list = db.get_content()
+        return render_template("story.html", title=title, author=username, content_list=content_list)
+        #return redirect(url_for("edit"))
 
 @app.route("/story")
 def story():

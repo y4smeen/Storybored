@@ -44,8 +44,8 @@ Bloginator Project, Zamansky 2015
 
 * Timeline
 
-| Date                       | Work                                               |
-|----------------------------+----------------------------------------------------|
+| Date                       | Work                                             |
+|----------------------------+--------------------------------------------------|
 | October 9, Friday, 2015    | Initial Commit                                   |
 | October 11, Sunday, 2015   | Home Page Design                                 |
 |                            | Added buttons and basic forms                    |
@@ -58,4 +58,5 @@ Bloginator Project, Zamansky 2015
 | October 16, Friday, 2015   | Created a form for new post page                 |
 | October 17, Saturday, 2015 | Designed userpage and animated effects           |
 |                            | General animation detailing & editing            |
-|                            | Started working with databases                    |
+|                            | Started working with databases                   |
+|                            |                                                  |
