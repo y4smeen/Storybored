@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}
-
-Story
-
-{% endblock %}
+{% block title %}Story{% endblock %}
 
 {% block contents %}
 
-<h1>{{ title }}</h1>
+<div class="header">
+<h1>Title: {{ title }}</h1>
 <h3>By {{author}}</h3>
-{{body}}
-<br>
-<button class="btn"><a href="/edit">Add to this story</a></button>
-<br>
-<button class="btn"><a href="/userpage">Back to the Main Page</a></button>
-<br>
-<button class="btn"><a href="/logout">Logout</a></button>
+</div>
 
+<div class="story">
+<code>
+<font size="5">
+{{body}}
+</font>
+</code>
+</div>
+
+<div class="return">
+<table border="1" cellpadding="200">
+<tr><button class="btn"><a href="/edit">Add to this story</a></button></tr>
+<tr><button class="btn"><a href="/userpage">Back to the Main Page</a></button></tr>
+<tr><button class="btn"><a href="/logout">Logout</a></button></tr>
+</table>
+</div>
 {% endblock %}
