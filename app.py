@@ -22,7 +22,8 @@ def login():
             session["logged"]=1
             return redirect(url_for("userpage"))
         else:
-            return "You have entered an incorrect username or password <hr> Click <a href = '/login'> here </a> to go back to login page." #TODO: make an html page for this
+            error = "You have entered an incorrect username or password.\n"
+            return render_template("login.html", error=error)
         return render_template("login.html")
 
 @app.route("/signup", methods=['GET', 'POST'])
