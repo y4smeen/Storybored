@@ -1,6 +1,11 @@
 # Storybored
 Bloginator Project, Zamansky 2015
 
+* What is Storybored?
+
+Write your stories /on/ our board
+/when/ you're bored.
+
 * Team Members
 
 | Group Members  | Role                     | 
@@ -10,7 +15,7 @@ Bloginator Project, Zamansky 2015
 | Amanda Chiu    | User Experience Designer |
 | Eric Stringham | Middleware Developer     |
 
-* TODO To Do (Pages) [1/5]
+* To Do (Pages)
 - +Home Page+
 - Login Page
 - Main Page
