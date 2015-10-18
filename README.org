@@ -20,7 +20,7 @@ Bloginator Project, Zamansky 2015
 | Eric Stringham | Middleware Developer     |
 
 * To Do (Pages)
-** DONE +Home Page+
+** DONE Home Page
 ** Login Page
 ** Main Page
 ** Story Page
