@@ -47,6 +47,7 @@ def signup():
     if request.method=="GET":
         return render_template("signup.html")
     else:
+        session["uname"] = request.form["user"]
         db.add_user(request.form["user"], request.form["pass"])
         return redirect(url_for("confirm"))
 
@@ -75,6 +76,7 @@ def newpost():
         session["title"] = title
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
+        session["recentid"]=0
         db.add_story(title, session["user"], body)
         return redirect(url_for("story"))
 
@@ -89,7 +91,11 @@ def edit():
         username = session["uname"]
         sub = request.form["sub"]
         title = "<NO TITLE YET>"
-        db.update_story_link(0, db.add_story(title, username, body))
+        recentid=session["recentid"]
+        #db.update_story_link(0, db.add_story(title, username, body))
+        db.add_story(title, username, body);
+        db.update_story_link(recentid, recentid+1)
+        session["recentid"]=recentid+1
         return redirect(url_for("story"))
 
 @app.route("/story/")
