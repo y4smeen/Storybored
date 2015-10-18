@@ -54,3 +54,18 @@ Bloginator Project, Zamansky 2015
 - <2015-10-15 Thu> Created a sign up page
 - <2015-10-16 Fri> Form for new post page
 - <2015-10-17 Sat> Designed userpage and animated effects
+| Date                       | Work                                               |
+|----------------------------+----------------------------------------------------|
+| October 9, Friday, 2015    | - Initial Commit                                   |
+| October 11, Sunday, 2015   | - Home Page Design                                 |
+|                            | - Added buttons and basic forms                    |
+| October 12, Monday, 2015   | - Added basic user authentication, login, userpage |
+|                            | - Created base.html for formatting html pages      |
+| October 13, Tuesday, 2015  | - Added icons and small design improvements        |
+| October 15, Thursday, 2015 | - Created page for new posts                       |
+|                            | - Created a story page                             |
+|                            | - Created a sign up page                           |
+| October 16, Friday, 2015   | - Created a form for new post page                 |
+| October 17, Saturday, 2015 | - Designed userpage and animated effects           |
+|                            | - General animation detailing & editing            |
+|                            | - starting with databases                          |
