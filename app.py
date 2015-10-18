@@ -63,20 +63,16 @@ def newpost():
         sub = request.form["sub"]
         session["title"] = title
         session["body"] = body
-        return redirect(url_for("posts"))
-
-@app.route("/posts")
-def posts():
-    title = session["title"]
-    body = session["body"]
-    return render_template("posts.html",title=title, body=body)
+        return redirect(url_for("story"))
 
 @app.route("/story")
 def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
-        return render_template("story.html")
+        title = session["title"]
+        body = session["body"]
+        return render_template("story.html",title=title, body=body)
 
 @app.route("/edit", methods=["GET","POST"])
 def edit():
