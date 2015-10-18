@@ -139,6 +139,12 @@ input[type="password"] {
 }
 
 .error {
-    background-color:GRAY;
-    padding: 1%;
+    background-color: gray;
+    background-color: rgba(150, 150, 150, 0.8);
+    color: darkred;
+    border-radius: 1em;
+    box-shadow: 0.5em 0.5em 0.25em rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    margin: 0.5em auto;
+    padding: 0.5em 1em;
 }

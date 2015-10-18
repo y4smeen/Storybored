@@ -9,9 +9,11 @@ Log In
 {% block contents %}
 
 <h1>Log in to Storybored</h1>
+{% if error %}
 <div class="error">
-  <h3 style="color:#c0392b">{{error}}</h3>
+  <h3>{{error}}</h3>
 </div>
+{% endif %}
 <br><br>
 <form method="POST">
   Username: <input type="text" name="username" placeholder="Username">
