@@ -133,6 +133,7 @@ class Database:
         link = self.c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
         print "ROWID", rowid
         self.c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
+        self.db.commit()
         return link
     
     def remove_story(self, storyid):
