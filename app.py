@@ -9,6 +9,7 @@ SCHEMA = [
         ('author', 'int'),
         ('contents', 'text'),
         ('link', 'int'),
+        ('istop','int'),
     ]),
     ('users', [
         ('username', 'text'),
@@ -78,7 +79,7 @@ def newpost():
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
         session["recentid"]=1
-        db.add_story(title, session["user"], body)
+        db.add_story(title, session["user"], body, 1)
         return redirect(url_for("story"))
 
 @app.route("/edit/", methods=["GET","POST"])
@@ -91,7 +92,7 @@ def edit():
     else:
         title = "<NO TITLE YET>"
         recentid=session["recentid"]
-        db.update_story_link(recentid, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"]))
+        db.update_story_link(recentid, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"], 0))
         #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
         #db.update_story_link(recentid, recentid+1)
         session["recentid"]=recentid+1

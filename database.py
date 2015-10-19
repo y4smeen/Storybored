@@ -60,8 +60,8 @@ class Database:
         else:
             print " !- Valid database schema. Carry on."
     
-    def add_story(self, title, author, contents):
-        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?);", (title, str(author), contents, -1))
+    def add_story(self, title, author, contents, istop):
+        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
         self.db.commit()
         return self.c.lastrowid
         
