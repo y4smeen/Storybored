@@ -34,8 +34,8 @@ Bloginator Project, Zamansky 2015
 * To Do (Functions)
 - +Make log in+
 - +Make sign up+
-- Allow to make new posts
-- Allow to add to existing posts
+- +Allow to make new posts+
+- +Allow to add to existing posts+
 - Allow to delete old posts
 - Allow to delete old lines
 - Create a profile that shows only your posts (optional)

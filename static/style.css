@@ -285,3 +285,12 @@ table.loginborder {
     width: 20%;
     height: 20px;
 }
+
+.footer {
+    position: fixed;
+    right:0;
+    bottom:0;
+    margin:0;
+    padding:0;
+    width:15%;
+}
