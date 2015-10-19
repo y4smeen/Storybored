@@ -28,6 +28,8 @@ app.jinja_env.filters['idtoname'] = id_to_name
 @app.route('/')
 @app.route("/home/")
 def home():
+    if session["logged"] != 1:
+        session["logged"] = 0
     return render_template("home.html")
 
 @app.route("/login/", methods=['GET', 'POST'])
@@ -68,7 +70,7 @@ def userpage():
     else:
         return render_template("userpage.html",
         uname=db.get_user_by_id(session["user"]),
-        posts=db.get_top_posts(),
+        posts=reversed(db.get_top_posts()),
         yourposts=db.get_top_posts_by_user(session["user"]))
 
 @app.route("/newpost/", methods=['GET', 'POST'])
@@ -96,7 +98,7 @@ def edit():
     else:
         title = "<NO TITLE YET>"
         db.update_story_link(db.get_lowest_child(request.args.get('storyid')), db.add_story(title, session["user"], request.form["body"], 0))
-        return redirect(url_for("story"))
+        return redirect(url_for('story', storyid=request.args.get('storyid')))
 
 @app.route("/story/")
 def story():

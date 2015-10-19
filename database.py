@@ -99,16 +99,18 @@ class Database:
         return self.c.execute("SELECT rowid, title FROM stories WHERE istop=1 AND author=(?);", (str(userid),)).fetchall()
     
     def get_story_content(self, storyid):
-        out = self.c.execute("SELECT contents, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
+        out = self.c.execute("SELECT contents, link, author FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
         if out == None:
             return out
         if out[1] != -1:
-            return out[0] + '\n' + self.get_story_content(out[1])
-        return out[0]
+            insert = self.get_story_content(out[1])
+            out = [(out[0], out[2])]
+            out.extend(insert)
+            return out
+        return [(out[0], out[2])]
     
     def get_lowest_child(self, storyid):
         out = self.c.execute("SELECT rowid, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
-        print "OUTPUT IS THIS:", out
         if out == None:
             return out
         if out[1] != -1:
