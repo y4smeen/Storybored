@@ -28,8 +28,7 @@ app.jinja_env.filters['idtoname'] = id_to_name
 @app.route('/')
 @app.route("/home/")
 def home():
-    if session["logged"] != 1:
-        session["logged"] = 0
+    session["logged"] = 0
     return render_template("home.html")
 
 @app.route("/login/", methods=['GET', 'POST'])
