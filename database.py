@@ -96,10 +96,21 @@ class Database:
         return self.c.execute("SELECT rowid, title, author FROM stories WHERE istop=1;").fetchall()
 
     def get_story_content(self, storyid):
-        out = self.c.execute("SELECT contents FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
-        if out != None:
-            return out[0]
-        return out
+        out = self.c.execute("SELECT contents, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
+        if out == None:
+            return out
+        if out[1] != -1:
+            return out[0] + '\n' + self.get_story_content(out[1])
+        return out[0]
+    
+    def get_lowest_child(self, storyid):
+        out = self.c.execute("SELECT rowid, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
+        print "OUTPUT IS THIS:", out
+        if out == None:
+            return out
+        if out[1] != -1:
+            return self.get_lowest_child(out[1])
+        return out[0]
         
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())

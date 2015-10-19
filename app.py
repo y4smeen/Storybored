@@ -96,11 +96,7 @@ def edit():
         return render_template("edit.html", uname=username)
     else:
         title = "<NO TITLE YET>"
-        recentid=session["recentid"]
-        db.update_story_link(recentid, db.add_story(title, session["user"], request.form["body"], 0))
-        #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
-        #db.update_story_link(recentid, recentid+1)
-        session["recentid"]=recentid+1
+        db.update_story_link(db.get_lowest_child(request.args.get('storyid')), db.add_story(title, session["user"], request.form["body"], 0))
         return redirect(url_for("story"))
 
 @app.route("/story/")

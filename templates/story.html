@@ -40,7 +40,9 @@
     
     <div class="return">
       <table border="1" cellpadding="200">
-	<tr><button class="btn"><a href="/edit">Add to this story</a></button></tr>
+	{% if storyid != None %}
+	<tr><button class="btn"><a href="{{ url_for('edit', storyid=storyid) }}">Add to this story</a></button></tr>
+	{% endif %}
 	<tr><button class="btn"><a href="/userpage">Back to the Main Page</a></button></tr>
       </table>
     </div>
