@@ -8,12 +8,18 @@ Sign Up
 
 {% block contents %}
 
-<h1>Sign up here</h1>
+<div class="header"></div>
+<div class="headtext">
+  <h1 class="headtext">Sign up here</h1>
+</div>
 
+<br><br><br><br><br>
 <form method="POST">
-  Username: <input type="text" name="user" placeholder="Username">
+  Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input type="text" name="user" placeholder="Username">
   <br><br>
-  Password: <input type="password" name="pass" placeholder="Password">
+  Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input type="password" name="pass" placeholder="Password">
+  <br><br>
+  Repeat Password: <input type="password" name="check" placeholder="Repeat Password">
   <br><br>
   <input type="submit" name="submit" value="Submit" class="btn">
   <input type="submit" name="submit" value="Cancel" class="btn">
