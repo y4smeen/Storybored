@@ -79,7 +79,7 @@ def newpost():
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
         session["recentid"]=1
-        db.add_story(title, session["user"], body, 1)
+        db.add_story(title, db.get_user_by_id(session["user"]), body, 1)
         return redirect(url_for("story"))
 
 @app.route("/edit/", methods=["GET","POST"])
@@ -102,6 +102,8 @@ def edit():
 def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
+    elif request.method == "GET":
+        return render_template("story.html",title="POSTS",author="",content_list=db.get_top_posts(), author_list = db.get_authors(), length = len(db.get_top_posts()))
     else:
         username = db.get_user_by_id(session["user"])
         print(db.get_content())

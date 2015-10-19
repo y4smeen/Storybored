@@ -92,7 +92,10 @@ class Database:
     def get_authors(self):
         return parse_simple_selection(self.c.execute("SELECT author FROM stories;").fetchall())
 
+    def get_top_posts(self):
+        return parse_simple_selection(self.c.execute("SELECT * FROM stories where istop=1;").fetchall())
 
+        
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
 
