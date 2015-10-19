@@ -66,8 +66,9 @@ def userpage():
     if session["logged"]==0:
         return redirect(url_for("login"))
     else:
-        username = db.get_user_by_id(session["user"])
-        return render_template("userpage.html",uname=username)
+        return render_template("userpage.html",
+        uname=db.get_user_by_id(session["user"]),
+        posts=db.get_top_posts())
 
 @app.route("/newpost/", methods=['GET', 'POST'])
 def newpost():
@@ -77,15 +78,12 @@ def newpost():
         username = db.get_user_by_id(session["user"])
         return render_template("newpost.html", uname=username)
     else:
-        #print("sending post stuff through")
         title = request.form["title"]
         body = request.form["body"]
         session["title"] = title
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
-        session["recentid"]=1
-        db.add_story(title, session["user"], body, 1)
-        return redirect(url_for("story"))
+        return redirect(url_for("story", storyid=db.add_story(title, session["user"], body, 1)))
 
 @app.route("/edit/", methods=["GET","POST"])
 def edit():
@@ -103,21 +101,12 @@ def edit():
 def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
-    elif request.method == "GET":
-        return render_template("story.html",
-            title="POSTS", author="",
-            posts=db.get_top_posts(),
-            uname=db.get_user_by_id(session["user"]),
-            storyid=request.args.get('storyid'),
-            content=db.get_story_content(request.args.get('storyid')))
-    else:
-        username = db.get_user_by_id(session["user"])
-        print(db.get_content())
-        print(len(db.get_content()))
-        print(db.get_users())
-        print()
-        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), posts=db.get_top_posts())
-
+    return render_template("story.html",
+        title="POSTS", author="",
+        posts=db.get_top_posts(),
+        uname=db.get_user_by_id(session["user"]),
+        storyid=request.args.get('storyid'),
+        content=db.get_story_content(request.args.get('storyid')))
 
 @app.route("/logout/")
 def logout():

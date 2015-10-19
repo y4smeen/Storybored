@@ -20,31 +20,21 @@
   <div class="main">
     <button class="btn"><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
     <center>
-      <div class="book">
-	<br><br><br><br>
-	<a href="/story">Hello</a>
-	<br>
-	by
-	<br>
-	Author
-      </div>
-      <br><br>
-      <table>
-	<tr>
-	  <td class=cell><a href="{{url_for('story')}}">
-	      Hello
-	    </a>
+    
+    {% for post in posts %}
+    <div class="book">
+	    <br><br><br><br>
+	    <a href="{{ url_for('story', storyid=post[0]) }}">{{ post[1] }}</a>
 	    <br>
 	    by
 	    <br>
-	    Author
-	  </td>
-	</tr>
-      </table>
-    </center>
+	    {{ post[2]|idtoname }}
+    </div>
+    {% endfor %}
     
     <br><br>
-    
-  </div>
+    </center>
+    <br><br>
+    </div>
 </div>
 {% endblock %}
