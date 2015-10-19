@@ -26,10 +26,14 @@
     <div class="story">
       <code>
 	<font size="5">
-	  {% for n in range(0,length) %}
-	  {{author_list[n]}}: {{content_list[n]}}
+	{% if storyid == None %}
+	  {% for post in posts %}
+	  {{ post[2]|idtoname }}: <a href="{{ url_for('story', storyid=post[0]) }}">{{ post[1] }}</a>
 	  <br>
 	  {% endfor %}
+	{% else %}
+	  {{ content }}
+	{% endif %}
 	</font>
       </code>
     </div>

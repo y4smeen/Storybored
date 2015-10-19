@@ -19,7 +19,12 @@ SCHEMA = [
 
 db = Database(DATABASE, SCHEMA)
 
+def id_to_name(user):
+    return db.get_user_by_id(user)
+
 app = Flask(__name__)
+app.jinja_env.filters['idtoname'] = id_to_name
+
 @app.route('/')
 @app.route("/home/")
 def home():
@@ -79,7 +84,7 @@ def newpost():
         session["body"] = body
         session["author"] = db.get_user_by_id(session["user"])
         session["recentid"]=1
-        db.add_story(title, db.get_user_by_id(session["user"]), body, 1)
+        db.add_story(title, session["user"], body, 1)
         return redirect(url_for("story"))
 
 @app.route("/edit/", methods=["GET","POST"])
@@ -92,7 +97,7 @@ def edit():
     else:
         title = "<NO TITLE YET>"
         recentid=session["recentid"]
-        db.update_story_link(recentid, db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"], 0))
+        db.update_story_link(recentid, db.add_story(title, session["user"], request.form["body"], 0))
         #db.add_story(title, db.get_user_by_id(session["user"]), request.form["body"])
         #db.update_story_link(recentid, recentid+1)
         session["recentid"]=recentid+1
@@ -103,16 +108,20 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     elif request.method == "GET":
-        username = db.get_user_by_id(session["user"])
-        return render_template("story.html",title="POSTS",author="",content_list=db.get_top_posts(), author_list = db.get_authors(), length = len(db.get_top_posts()), uname=username)
+        return render_template("story.html",
+            title="POSTS", author="",
+            posts=db.get_top_posts(),
+            uname=db.get_user_by_id(session["user"]),
+            storyid=request.args.get('storyid'),
+            content=db.get_story_content(request.args.get('storyid')))
     else:
         username = db.get_user_by_id(session["user"])
         print(db.get_content())
         print(len(db.get_content()))
         print(db.get_users())
         print()
-        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content(), author_list = db.get_authors(), length = len(db.get_content()),uname=username)
-        
+        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), posts=db.get_top_posts())
+
 
 @app.route("/logout/")
 def logout():
