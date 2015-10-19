@@ -95,6 +95,9 @@ class Database:
     def get_top_posts(self):
         return self.c.execute("SELECT rowid, title, author FROM stories WHERE istop=1;").fetchall()
 
+    def get_top_posts_by_user(self, userid):
+        return self.c.execute("SELECT rowid, title FROM stories WHERE istop=1 AND author=(?);", (str(userid),)).fetchall()
+    
     def get_story_content(self, storyid):
         out = self.c.execute("SELECT contents, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
         if out == None:
@@ -111,6 +114,7 @@ class Database:
         if out[1] != -1:
             return self.get_lowest_child(out[1])
         return out[0]
+    
         
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())

@@ -68,7 +68,8 @@ def userpage():
     else:
         return render_template("userpage.html",
         uname=db.get_user_by_id(session["user"]),
-        posts=db.get_top_posts())
+        posts=db.get_top_posts(),
+        yourposts=db.get_top_posts_by_user(session["user"]))
 
 @app.route("/newpost/", methods=['GET', 'POST'])
 def newpost():
