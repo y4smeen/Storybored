@@ -10,7 +10,9 @@
     <div id="container">
       {% block contents %}{% endblock %}
       <div>
+	{% if session["logged"]>0 %}
 	<img src="../static/mascot.gif" class="footer">
+	{% endif %}
       </div>
     </div>
 </body>
