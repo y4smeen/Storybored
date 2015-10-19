@@ -8,18 +8,7 @@ Edit Story
 
 {% block contents %}
 
-<div class="sidebar">
-  <br><br><br><br>
-  <h3>{{uname}}</h3>
-  <h3>Your Posts</h3>
-</div>
 
-<div class="header"></div>
-<div class="headtext">
-  <img id="logo" class="smalllogo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo" height="50">
-  <h1 class="headtext"> Welcome, <u>{{uname}}</u>!</h1>
-  <a href="/logout" class="btn" style="float: right"> Logout </a>
-</div>
 
 
 <div class="main">
@@ -36,3 +25,5 @@ Edit Story
 </div>
 
 {% endblock %}
+
+{% block heading %}Add a New Line{% endblock %}

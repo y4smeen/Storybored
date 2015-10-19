@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>{% block title %}{% endblock %} - StoryBored</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-</head>
-<body {% if index %}class="index"{% endif %}>
+  </head>
+  <body {% if index %}class="index"{% endif %}>
     <div id="container">
+      {% if session["logged"]>0 %}
+      <div class="sidebar">
+	<br><br><br><br>
+	<h3>{{ session["uname"] }}</h3>
+	<h3>Your Posts</h3>
+	{% for post in yourposts %}
+	<a href="{{ url_for('story', storyid=post[0]) }}">{{ post[1] }}</a><br><br>
+	{% endfor %}
+      </div>
+      
+      <div class="header"></div>
+      <div class="headtext">
+	<img id="logo" class="smalllogo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo" height="50">
+	<h1 class="headtext">{% block heading %}{% endblock %}</h1>
+	<a href="/logout" class="btn" style="float: right"> Logout </a>
+      </div>
+      {% endif %}
       {% block contents %}{% endblock %}
       <div>
 	{% if session["logged"]>0 %}
@@ -15,5 +32,5 @@
 	{% endif %}
       </div>
     </div>
-</body>
+  </body>
 </html>
