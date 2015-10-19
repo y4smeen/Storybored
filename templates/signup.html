@@ -8,25 +8,28 @@ Sign Up
 
 {% block contents %}
 
-<div class="header"></div>
-<div class="headtext">
-  <h1 class="headtext">Sign up here</h1>
-</div>
+<div class="loginheader">
+<img id="logo" class="smalllogo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo" height="50"><h1>Sign up for Storybored</h1></div>
 
-<br><br><br><br><br>
+<div class="loginbody">
 <form method="POST">
-  Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input type="text" name="user" placeholder="Username">
-  <br><br>
-  Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input type="password" name="pass" placeholder="Password">
-  <br><br>
-  Repeat Password: <input type="password" name="check" placeholder="Repeat Password">
-  <br><br>
+<table align="center" cellpadding="25" class="loginborder" bgcolor="#f1c40f">
+<tr>
+  <td><label style="display:block" for="username"><p>Username:</p></label></td>
+  <td><input type="text" name="user" placeholder="Username"></td>
+</tr>
+  <tr>
+   <td><label style="display:block" for="password"><p>Password:</p></label></td>
+   <td><input type="password" name="password" placeholder="Password"/></td>
+</tr>
+</table>
   <input type="submit" name="submit" value="Submit" class="btn">
   <input type="submit" name="submit" value="Cancel" class="btn">
 </form>
 <br>
 <button class="btn"><a href="/login">Back to Log In</a></button>
 <br><br>
+<br><br>
 <button class="btn"><a href="/home">Back to Home Page</a></button>
-
+</div>
 {% endblock %}
