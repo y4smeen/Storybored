@@ -109,6 +109,18 @@ def story():
         storyid=request.args.get('storyid'),
         content=db.get_story_content(request.args.get('storyid')))
 
+@app.route("/deletepost")
+def deletepost():
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    return redirect(url_for("userpage"))
+
+@app.route("/deleteline")
+def deleteline():
+    if session["logged"]==0:
+        return redirect(url_for("login"))
+    return redirect(url_for("userpage"))
+
 @app.route("/logout/")
 def logout():
     session["username"]=""
