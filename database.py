@@ -93,8 +93,13 @@ class Database:
         return parse_simple_selection(self.c.execute("SELECT author FROM stories;").fetchall())
 
     def get_top_posts(self):
-        return parse_simple_selection(self.c.execute("SELECT * FROM stories where istop=1;").fetchall())
+        return self.c.execute("SELECT rowid, title, author FROM stories WHERE istop=1;").fetchall()
 
+    def get_story_content(self, storyid):
+        out = self.c.execute("SELECT contents FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
+        if out != None:
+            return out[0]
+        return out
         
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
@@ -106,7 +111,7 @@ class Database:
         return 0;
     
     def get_user_by_id(self, userid):
-        return self.c.execute("SELECT username FROM users WHERE rowid=(?);", str(userid)).fetchone()[0] 
+        return self.c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def parse_simple_selection(output):
     members = []
