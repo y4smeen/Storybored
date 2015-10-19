@@ -103,14 +103,15 @@ def story():
     if session["logged"]==0:
         return redirect(url_for("login"))
     elif request.method == "GET":
-        return render_template("story.html",title="POSTS",author="",content_list=db.get_top_posts(), author_list = db.get_authors(), length = len(db.get_top_posts()))
+        username = db.get_user_by_id(session["user"])
+        return render_template("story.html",title="POSTS",author="",content_list=db.get_top_posts(), author_list = db.get_authors(), length = len(db.get_top_posts()), uname=username)
     else:
         username = db.get_user_by_id(session["user"])
         print(db.get_content())
         print(len(db.get_content()))
         print(db.get_users())
         print()
-        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content(), author_list = db.get_authors(), length = len(db.get_content()))
+        return render_template("story.html", title=session["title"], author=db.get_user_by_id(session["user"]), content_list=db.get_content(), author_list = db.get_authors(), length = len(db.get_content()),uname=username)
         
 
 @app.route("/logout/")
