@@ -277,3 +277,9 @@ table.loginborder {
 .padded {
     padding: 1%;
 }
+
+.titleinput {
+    padding: 1%;
+    width: 20%;
+    height: 20px;
+}
