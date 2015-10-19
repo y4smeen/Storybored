@@ -35,13 +35,13 @@ Bloginator Project, Zamansky 2015
 - +Make log in+
 - +Make sign up+
 - Allow to make new posts
-- Allow to edit existing posts
+- Allow to add to existing posts
 - Allow to delete old posts
 - Allow to delete old lines
-- Create a profile that shows only your posts
-- Create other people's profiles
-- Create a search bar
-- Make it so only people with permission can edit posts
+- Create a profile that shows only your posts (optional)
+- Create other people's profiles (optional)
+- Create a search bar (optional)
+- Make it so only people with permission can edit posts (optional)
 
 * Timeline
 
