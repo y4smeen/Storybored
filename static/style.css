@@ -210,6 +210,8 @@ table.bottomBorder th {
 .book {
     background-image: url(../static/Book.png);
     background-repeat: no-repeat;
+    box-shadow: 1em 1em 0.5em rgba(0, 0, 0, 0.2);
+    border-radius: 13px;
     width: 200px;
     height: 200px;
 }
