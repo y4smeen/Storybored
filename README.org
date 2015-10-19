@@ -25,9 +25,10 @@ Bloginator Project, Zamansky 2015
 
 * To Do (Pages)
 - +Home Page+
-- Login Page
-- Main Page
-- Story Page
+- +Login Page+
+- +Signup Page+
+- +Main Page+
+- +Story Page+
 - +New Post Page+
 
 * To Do (Functions)
