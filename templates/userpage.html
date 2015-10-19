@@ -2,23 +2,11 @@
 {% block title %} Welcome {% endblock %}
 {% block contents %}
 
+
+
 <div class="container">
-  <div class="sidebar">
-    <br><br><br><br>
-    <h3>{{uname}}</h3>
-    <h3>Your Posts</h3>
-    {% for post in yourposts %}
-      <a href="{{ url_for('story', storyid=post[0]) }}">{{ post[1] }}</a><br><br>
-    {% endfor %}
-  </div>
-  
-  <div class="header"></div>
-  <div class="headtext">
-    <img id="logo" class="smalllogo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo" height="50">
-    <h1 class="headtext"> Welcome, <u>{{uname}}</u>!</h1>
-   <a href="/logout" class="btn" style="float: right"> Logout </a>
-  </div>
-  
+
+
   
   <div class="main">
     <button class="btn"><a href="{{url_for('newpost')}}"> Make a New Post </a></button>
@@ -41,3 +29,5 @@
     </div>
 </div>
 {% endblock %}
+
+  {% block heading %}Welcome, {{uname}}!{% endblock %}
