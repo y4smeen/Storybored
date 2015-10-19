@@ -47,7 +47,7 @@
 	<tr><button class="btn"><a href="{{ url_for('edit', storyid=storyid) }}">Add to this story</a></button></tr>
 	{% endif %}
 	<tr><button class="btn"><a href="/userpage">Back to the Main Page</a></button></tr>
-	<tr><button class="btn"><a href="/deletepost">Delete this post</a></button></tr>
+	<tr><button class="btn"><a href="{{ url_for('deletepost', storyid=storyid) }}">Delete this post</a></button></tr>
 	<tr><button class="btn"><a href="/deleteline">Delete the last line</a></button></tr>
       </table>
       </div>

@@ -117,7 +117,6 @@ class Database:
             return self.get_lowest_child(out[1])
         return out[0]
     
-        
     def get_users(self):
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
 
@@ -129,6 +128,17 @@ class Database:
     
     def get_user_by_id(self, userid):
         return self.c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
+    
+    def remove_post(self, rowid):
+        link = self.c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
+        print "ROWID", rowid
+        self.c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
+        return link
+    
+    def remove_story(self, storyid):
+        link = self.remove_post(storyid)
+        if link > 0:
+            self.remove_story(link)
 
 def parse_simple_selection(output):
     members = []
