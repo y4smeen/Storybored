@@ -8,11 +8,10 @@ Sign Up
 
 {% block contents %}
 
-<div class="loginheader"></div>
-<img id="logo" class="smalllogo" src="{{ url_for('static', filename='ebook_circle.png') }}" alt="storyboredlogo" height="50"><h1 class="headtext">Sign up for Storybored</h1></div>
+<h1>Sign up here</h1>
 
-<div class="loginbody">
 <form method="POST">
+<<<<<<< HEAD
 <table align="center" cellpadding="25" class="loginborder" bgcolor="#f1c40f">
   <tr>
     <td><label style="display:block" for="username"><p>Username:</p></label></td>
@@ -28,13 +27,18 @@ Sign Up
   </tr>
 </table>
 <br><br>
+=======
+  Username: <input type="text" name="user" placeholder="Username">
+  <br><br>
+  Password: <input type="password" name="pass" placeholder="Password">
+  <br><br>
+>>>>>>> 2e8f1052634faa7464dcd46919f65a8f3731281f
   <input type="submit" name="submit" value="Submit" class="btn">
   <input type="submit" name="submit" value="Cancel" class="btn">
 </form>
 <br>
 <button class="btn"><a href="/login">Back to Log In</a></button>
 <br><br>
-<br><br>
 <button class="btn"><a href="/home">Back to Home Page</a></button>
-</div>
+
 {% endblock %}
