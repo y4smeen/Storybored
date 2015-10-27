@@ -35,7 +35,10 @@ class Database:
 
     """
     def __init__(self, database, schema):
-        """StoryBored Database __init__.
+        #p sure we don't need this
+        
+
+                """StoryBored Database __init__.
 
         Args:
             database (str): Path to the sqlite3 database.
@@ -63,9 +66,17 @@ class Database:
             print " !- Valid database schema. Carry on."
 
     def add_story(self, title, author, contents, istop):
-        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
-        self.db.commit()
-        return self.c.lastrowid
+        #
+        #self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
+        #self.db.commit()
+        #return self.c.lastrowid
+        db.stories.insert({'title':title,
+                           'author':str(author),
+                           'contents':contents,
+                           'link':-1,
+                           'istop':istop})
+        
+                           
 
     def update_story_link(self, story, link):
         self.c.execute("UPDATE stories SET link=(?) WHERE rowid=(?);", (link, story))
