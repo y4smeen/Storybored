@@ -69,8 +69,8 @@ def userpage():
     else:
         return render_template("userpage.html",
         uname=db.get_user_by_id(session["user"]),
-        posts=reversed(db.get_top_posts()),
-        yourposts=db.get_top_posts_by_user(session["user"]))
+        posts=reversed(db.get_top_posts(-1)),
+        yourposts=db.get_top_posts(session["user"]))
 
 @app.route("/newpost/", methods=['GET', 'POST'])
 def newpost():
@@ -105,7 +105,7 @@ def story():
         return redirect(url_for("login"))
     return render_template("story.html",
         title="POSTS", author="",
-        posts=db.get_top_posts(),
+        posts=db.get_top_posts(-1),
         uname=db.get_user_by_id(session["user"]),
         storyid=request.args.get('storyid'),
         content=db.get_story_content(request.args.get('storyid')))
