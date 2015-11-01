@@ -65,6 +65,9 @@ class Database:
         else:
             print " !- Valid database schema. Carry on."
 
+    def id_to_name(user):
+        return db.get_user_by_id(user)
+
     def add_story(self, title, author, contents, istop):
         #
         #self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
