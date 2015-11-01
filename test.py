@@ -60,6 +60,28 @@ def get_top_posts(userid):
         l.append([document['rowid'], document['title']])
     return l
 
+def get_story_content(storyid):
+    cursor = db.stories.find({'rowid':storyid})
+    out = [cursor[0]['contents'],cursor[0]['link'],cursor[0]['author']]
+    try:
+        if out[1] != -1:
+            insert = get_story_content(out[1])
+            out = [(out[0],out[2])]
+            out.extend(insert)
+            return out
+    except IndexError:
+        return out
+    return [(out[0], out[2])]
+
+def get_lowest_child(storyid):
+    cursor = db.stories.find({'rowid':storyid})
+    out =[cursor[0]['rowid'],cursor[0]['link']]
+    try:
+        if out[1] != -1:
+            return get_lowest_child(out[1])
+    except IndexError:
+        return out
+    return out[0]
 
 #-------------testing------------------------------- 
 dropCollections(names)
@@ -67,6 +89,9 @@ dropCollections(names)
 add_story("title",1,"this is a story.",'1')
 add_story("t2",1,"another story",'1')
 add_story("t3",4,"Once upon a time.",'1')
+update_story_link(get_lowest_child(1),add_story("title",2,"this is the second line of the story",0))
+update_story_link(get_lowest_child(1),add_story("title",4,"third line",0))
 
 printC(db.stories.find())
-printC(get_top_posts(-1))
+#printC(get_top_posts(-1))
+print get_story_content(1)
