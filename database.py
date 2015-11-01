@@ -65,29 +65,34 @@ class Database:
         else:
             print " !- Valid database schema. Carry on."
 
-    def id_to_name(user):
-        return db.get_user_by_id(user)
-
     def add_story(self, title, author, contents, istop):
-        #
-        #self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
-        #self.db.commit()
-        #return self.c.lastrowid
+        #~not sure if this is actually how rowid works in their project
+        #~may cause future problems
+        rid = get_next_rowid() + 1
         db.stories.insert({'title':title,
-                           'author':str(author),
+                           'author': author,
                            'contents':contents,
                            'link':-1,
-                           'istop':istop})
-        
-                           
+                           'rowid': rid,
+                           'istop': istop})
+        return rid
+         
+
 
     def update_story_link(self, story, link):
-        self.c.execute("UPDATE stories SET link=(?) WHERE rowid=(?);", (link, story))
-        self.db.commit()
+        #~if rowid = story, link = link
+        db.stories.update({ 'rowid' : story },
+                          { '$set' : { 'link' : link } })
 
+    #~gets highest rowid in stories
     def get_next_rowid(self):
-        return self.c.execute("select max(rowid) from stories;")
-        #self.db.commit()
+        cursor = db.stories.find().sort([('rowid', -1)]).limit(1)
+        try:
+            rid = cursor[0]['rowid']
+        except IndexError:
+            rid = 0
+        return rid
+
 
     def add_user(self, username, password):
         password = generate_password_hash(password)
@@ -99,20 +104,19 @@ class Database:
         self.c.execute("UPDATE users SET password=(?) WHERE username=(?);", (password, username))
         self.db.commit()
 
-    def get_titles(self):
-        return parse_simple_selection(self.c.execute("SELECT title FROM stories;").fetchall())
-
-    def get_content(self):
-        return parse_simple_selection(self.c.execute("SELECT contents FROM stories;").fetchall())
-
-    def get_authors(self):
-        return parse_simple_selection(self.c.execute("SELECT author FROM stories;").fetchall())
-
-    def get_top_posts(self):
-        return self.c.execute("SELECT rowid, title, author FROM stories WHERE istop=1;").fetchall()
-
-    def get_top_posts_by_user(self, userid):
-        return self.c.execute("SELECT rowid, title FROM stories WHERE istop=1 AND author=(?);", (str(userid),)).fetchall()
+    #~get_ titles,content,authors were never used so I deleted them
+    
+    #~combined get_top_posts and get_top_posts_for_user
+    #~userid = -1, all top posts otherwise for_user
+    def get_top_posts(userid):
+        if userid == -1:
+            cursor = db.stories.find({'istop': '1'})
+        else:
+            cursor = db.stories.find({'istop':'1'},{'author':userid})
+        l = []
+        for document in cursor:
+            l.append([document['rowid'], document['title']])
+        return l
 
     def get_story_content(self, storyid):
         out = self.c.execute("SELECT contents, link, author FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
