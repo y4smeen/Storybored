@@ -38,7 +38,7 @@ class Database:
         #p sure we don't need this
         
 
-                """StoryBored Database __init__.
+        """StoryBored Database __init__.
 
         Args:
             database (str): Path to the sqlite3 database.
@@ -66,8 +66,6 @@ class Database:
             print " !- Valid database schema. Carry on."
 
     def add_story(self, title, author, contents, istop):
-        #~not sure if this is actually how rowid works in their project
-        #~may cause future problems
         rid = get_next_rowid() + 1
         db.stories.insert({'title':title,
                            'author': author,
@@ -78,7 +76,8 @@ class Database:
         return rid
          
 
-
+    #~used to link lines together based on rowid
+    #~link = rowid of nextline
     def update_story_link(self, story, link):
         #~if rowid = story, link = link
         db.stories.update({ 'rowid' : story },
@@ -108,7 +107,7 @@ class Database:
     
     #~combined get_top_posts and get_top_posts_for_user
     #~userid = -1, all top posts otherwise for_user
-    def get_top_posts(userid):
+    def get_top_posts(self, userid):
         if userid == -1:
             cursor = db.stories.find({'istop': '1'})
         else:
@@ -118,23 +117,29 @@ class Database:
             l.append([document['rowid'], document['title']])
         return l
 
+    #~returns list of lines linked to eachother by rowids
     def get_story_content(self, storyid):
-        out = self.c.execute("SELECT contents, link, author FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
-        if out == None:
-            return out
-        if out[1] != -1:
-            insert = self.get_story_content(out[1])
-            out = [(out[0], out[2])]
-            out.extend(insert)
+        cursor = db.stories.find({'rowid':storyid})
+        out = [cursor[0]['contents'],cursor[0]['link'],cursor[0]['author']]
+        try:
+            if out[1] != -1:
+                insert = get_story_content(out[1])
+                out = [(out[0],out[2])]
+                out.extend(insert)
+                return out
+        except IndexError:
             return out
         return [(out[0], out[2])]
 
+    #~returns the rowid of the line before storyid
     def get_lowest_child(self, storyid):
-        out = self.c.execute("SELECT rowid, link FROM stories WHERE rowid=(?);", (storyid,)).fetchone()
-        if out == None:
+        cursor = db.stories.find({'rowid':storyid})
+        out =[cursor[0]['rowid'],cursor[0]['link']]
+        try:
+            if out[1] != -1:
+                return get_lowest_child(out[1])
+        except IndexError:
             return out
-        if out[1] != -1:
-            return self.get_lowest_child(out[1])
         return out[0]
 
     def get_users(self):
