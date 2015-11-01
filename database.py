@@ -22,8 +22,8 @@ Schemas should be formatted as follows:
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-# import sqlite3
-from pymongo import MongoClient
+import sqlite3
+#from pymongo import MongoClient
 
 class Database:
     """StoryBored main database handler class.
@@ -38,7 +38,7 @@ class Database:
         #p sure we don't need this
         
 
-                """StoryBored Database __init__.
+        """StoryBored Database __init__.
 
         Args:
             database (str): Path to the sqlite3 database.
@@ -49,9 +49,8 @@ class Database:
         statement, all of the database's tables will be dropped and it will be
         recrated with the appropriate tables and data.
         """
-        # self.db = db = sqlite3.connect(database, check_same_thread=False)
-        # self.c = c = db.cursor()
-        db = connection[database]
+        self.db = db = sqlite3.connect(database, check_same_thread=False)
+        self.c = c = db.cursor()
         print " !- Connecting to database'" + database + "'..."
         schema = format_schema(schema)
         if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
@@ -66,16 +65,10 @@ class Database:
             print " !- Valid database schema. Carry on."
 
     def add_story(self, title, author, contents, istop):
-        #
-        #self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
-        #self.db.commit()
-        #return self.c.lastrowid
-        db.stories.insert({'title':title,
-                           'author':str(author),
-                           'contents':contents,
-                           'link':-1,
-                           'istop':istop})
         
+        self.c.execute("INSERT INTO stories VALUES(?, ?, ?, ?, ?);", (title, str(author), contents, -1, istop))
+        self.db.commit()
+        return self.c.lastrowid
                            
 
     def update_story_link(self, story, link):
