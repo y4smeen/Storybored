@@ -31,7 +31,7 @@ db = connection["storybored"]
 
 
 def add_story(title, author, contents, istop):
-    rid = get_next_rowid() + 1
+    rid = get_next_rowid("stories") + 1
     db.stories.insert({'title':title,
                        'author': author,
                        'contents':contents,
@@ -48,9 +48,9 @@ def update_story_link(story, link):
     db.stories.update({ 'rowid' : story },
                       { '$set' : { 'link' : link } })
 
-#~gets highest rowid in stories
-def get_next_rowid(self):
-    cursor = db.stories.find().sort([('rowid', -1)]).limit(1)
+#~gets highest rowid in collection
+def get_next_rowid(collection):
+    cursor = db[collection].find().sort([('rowid', -1)]).limit(1)
     try:
         rid = cursor[0]['rowid']
     except IndexError:
@@ -131,7 +131,6 @@ def remove_story(storyid):
     link = remove_post(storyid)
     if link > 0:
         remove_story(link)
->>>>>>> 5168210bc3f1059ecd7ae0c5aea6316b64c05dbe
 
 def parse_simple_selection(output):
     members = []
