@@ -25,7 +25,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # import sqlite3
 from pymongo import MongoClient
 
-
 connection = MongoClient()
 db = connection["storybored"]
 
@@ -33,7 +32,7 @@ db = connection["storybored"]
 def add_story(title, author, contents, istop):
     rid = get_next_rowid("stories") + 1
     db.stories.insert({'title':title,
-                       'author': author,
+                       'author':str(author),
                        'contents':contents,
                        'link':-1,
                        'rowid': rid,
@@ -53,7 +52,7 @@ def get_next_rowid(collection):
     cursor = db[collection].find().sort([('rowid', -1)]).limit(1)
     try:
         rid = cursor[0]['rowid']
-    except IndexError:
+    except (IndexError, KeyError):
         rid = 0
     return rid
 
@@ -61,7 +60,8 @@ def get_next_rowid(collection):
 def add_user(username, password):
     password = generate_password_hash(password)
     db.users.insert({'username' : username, 
-    				 'password' : password })
+                     'password' : password,
+                     'rowid' : get_next_rowid('users')+1})
 
 def update_user_password(username, new_password):
     password = generate_password_hash(new_password)
@@ -74,33 +74,32 @@ def update_user_password(username, new_password):
 #~userid = -1, all top posts otherwise for_user
 def get_top_posts(userid):
     if userid == -1:
-        cursor = db.stories.find({'istop': '1'})
+        cursor = db.stories.find({ 'rowid' : { '$exists': True}, 'istop': 1})
     else:
-        cursor = db.stories.find({'istop':'1'},{'author':userid})
+        cursor = db.stories.find({ 'rowid' : { '$exists': True}, 'istop':1,'author':str(userid)})
     l = []
-    for document in cursor:
-        l.append([document['rowid'], document['title']])
+    for doc in cursor:
+        l.append([doc['rowid'],doc['title'],doc['author']])
     return l
 
 #~returns list of lines linked to eachother by rowids
 def get_story_content(storyid):
-    cursor = db.stories.find({'rowid':storyid})
-    out = [cursor[0]['contents'],cursor[0]['link'],cursor[0]['author']]
+    cursor = db.stories.find({'rowid':int(storyid)})[0]
+    out = [cursor['contents'],cursor['link'],cursor['author']]
     try:
         if out[1] != -1:
             insert = get_story_content(out[1])
             out = [(out[0],out[2])]
             out.extend(insert)
             return out
-
     except IndexError:
         return out
     return [(out[0], out[2])]
 
 #~returns the rowid of the line before storyid
 def get_lowest_child(storyid):
-    cursor = db.stories.find({'rowid':storyid})
-    out =[cursor[0]['rowid'],cursor[0]['link']]
+    cursor = db.stories.find({'rowid':int(storyid)})[0]
+    out =[cursor['rowid'],cursor['link']]
     try:
         if out[1] != -1:
             return get_lowest_child(out[1])
