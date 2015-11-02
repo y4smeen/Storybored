@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from database import Database, format_schema
 import user
 
-DATABASE = './database.db'
+DATABASE = 'storybored'
 SCHEMA = [
     ('stories', [
         ('title', 'text'),
@@ -17,10 +17,10 @@ SCHEMA = [
     ]),
 ]
 
-db = Database(DATABASE, SCHEMA)
+db = Database(DATABASE)
 
 def id_to_name(user):
-    return db.get_user_by_id(user)
+	return db.get_user_by_id(user)
 
 app = Flask(__name__)
 app.jinja_env.filters['idtoname'] = id_to_name
@@ -29,7 +29,9 @@ app.jinja_env.filters['idtoname'] = id_to_name
 @app.route("/home/")
 def home():
   # session["logged"] = 0
-    return render_template("home.html")
+  	if (not "logged" in session):
+  		session["logged"] = 0
+	return render_template("home.html")
 
 @app.route("/login/", methods=['GET', 'POST'])
 def login():

@@ -34,36 +34,40 @@ class Database:
             the sqlite3 database.
 
     """
-    def __init__(self, database, schema):
-        #p sure we don't need this
+    # def __init__(self, database, schema):
+    #     #p sure we don't need this
         
 
-        """StoryBored Database __init__.
+    #     """StoryBored Database __init__.
 
-        Args:
-            database (str): Path to the sqlite3 database.
-            schema (schema_statement): Schema to be applied to the
-                database.
+    #     Args:
+    #         database (str): Path to the sqlite3 database.
+    #         schema (schema_statement): Schema to be applied to the
+    #             database.
 
-        If the database's schema does not match the one provided by the schema
-        statement, all of the database's tables will be dropped and it will be
-        recrated with the appropriate tables and data.
-        """
-        # self.db = db = sqlite3.connect(database, check_same_thread=False)
-        # self.c = c = db.cursor()
+    #     If the database's schema does not match the one provided by the schema
+    #     statement, all of the database's tables will be dropped and it will be
+    #     recrated with the appropriate tables and data.
+    #     """
+    #     # self.db = db = sqlite3.connect(database, check_same_thread=False)
+    #     # self.c = c = db.cursor()
+        
+    #     print " !- Connecting to database'" + database + "'..."
+    #     schema = format_schema(schema)
+    #     if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
+    #         print " !- Invalid database schema! Dropping everything and recreating."
+    #         for table in c.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall():
+    #             print " !-- Dropping table " + table[0] + "..."
+    #             c.execute("DROP TABLE " + table[0] + ";")
+    #         for statement in schema:
+    #             print " !-- Execute: (" + statement[0] + ";)"
+    #             c.execute(statement[0] + ";")
+    #     else:
+    #         print " !- Valid database schema. Carry on."
+    def __init__(self, database):
+    	connection = MongoClient()
         db = connection[database]
         print " !- Connecting to database'" + database + "'..."
-        schema = format_schema(schema)
-        if c.execute("SELECT sql FROM sqlite_master WHERE type='table';").fetchall() != schema:
-            print " !- Invalid database schema! Dropping everything and recreating."
-            for table in c.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall():
-                print " !-- Dropping table " + table[0] + "..."
-                c.execute("DROP TABLE " + table[0] + ";")
-            for statement in schema:
-                print " !-- Execute: (" + statement[0] + ";)"
-                c.execute(statement[0] + ";")
-        else:
-            print " !- Valid database schema. Carry on."
 
     def add_story(self, title, author, contents, istop):
         rid = get_next_rowid() + 1
