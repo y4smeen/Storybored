@@ -146,6 +146,7 @@ class Database:
         return parse_simple_selection(self.c.execute("SELECT username FROM users;").fetchall())
 
     def check_user_password(self, username, password):
+        # returns the row ID if password is correct, otherwise returns 0
         dat = self.c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
         if dat and check_password_hash(dat[1], password):
             return dat[0]

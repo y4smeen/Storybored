@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from database import Database, format_schema
 import user
+'''
+Session['logged'] determines whether someone is logged in
+0 means logged out
+1 means logged in
 
+
+'''
 DATABASE = './database.db'
 SCHEMA = [
     ('stories', [
@@ -42,7 +48,7 @@ def login():
         user = db.check_user_password(request.form["username"], request.form["password"])
         if user > 0:
             session["user"] = user
-            session["logged"]=1
+            session["logged"] = 1
             return redirect(url_for("userpage"))
         else:
             error = "You have entered an incorrect username or password.\n"
