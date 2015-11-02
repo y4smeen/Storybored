@@ -28,12 +28,12 @@ app.jinja_env.filters['idtoname'] = id_to_name
 @app.route('/')
 @app.route("/home/")
 def home():
-    session["logged"] = 0
+  # session["logged"] = 0
     return render_template("home.html")
 
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
-    session["logged"] = 0
+  #  session["logged"] = 0
     if request.method=="GET":
         return render_template("login.html")
     else:
@@ -54,13 +54,10 @@ def signup():
     if request.method=="GET":
         return render_template("signup.html")
     else:
-        session["uname"] = request.form["user"]
+        # session["uname"] = request.form["user"]
         db.add_user(request.form["user"], request.form["pass"])
-        return redirect(url_for("confirm"))
+        return redirect(url_for("login"))
 
-@app.route("/confirm/")
-def confirm():
-    return redirect(url_for("login"))
 
 @app.route("/userpage/")
 def userpage():
@@ -125,8 +122,8 @@ def deleteline():
 
 @app.route("/logout/")
 def logout():
-    session["username"]=""
-    session["logged"]=0
+    session['logged'] = 0
+    session.pop('userid', None)
     return redirect(url_for("home"))
 
 if __name__ == "__main__":
