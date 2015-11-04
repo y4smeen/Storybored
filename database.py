@@ -64,8 +64,8 @@ def add_user(username, password):
 
 def update_user_password(username, new_password):
     password = generate_password_hash(new_password)
-    db.users.update_many({'username' : username,
-                            'password': new_password})
+    db.users.update({'username' : username},
+                    {'password': new_password})
 
 #~get_ titles,content,authors were never used so I deleted them
 
@@ -111,14 +111,15 @@ def get_users(self):
     return parse_simple_selection(c.execute("SELECT username FROM users;").fetchall())
 
 def check_user_password(username, password):
+    dat = db.
     dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
     if dat and check_password_hash(dat[1], password):
         return dat[0]
     return 0;
 
 def get_user_by_id(userid):
-    cursor = db.users.find({'userid' : int(userid)})[0]
-    out =[cursor['userid'],cursor['link']]
+    cursor = db.users.find({'rowid' : int(userid)})[0]
+    out =[cursor['rowid'],cursor['link']]
     try:
         if out[1] != -1:
             return get_user_by_id(out[1])
@@ -128,7 +129,7 @@ def get_user_by_id(userid):
     # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
-
+    link = db.stories.
     #link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
     #print "ROWID", rowid
     #c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
@@ -141,10 +142,10 @@ def remove_story(storyid):
         remove_story(link)
 
 def parse_simple_selection(output):
-    #members = []
-    #for member in output:
-    #    members.append(member[0])
-    #return members
+    members = []
+    for member in output:
+        members.append(member[0])
+    return members
 
 #def format_schema(schema):
 #    output_match = []
