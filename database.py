@@ -110,10 +110,10 @@ def get_users(self):
     return parse_simple_selection(db.users.find())
 
 def check_user_password(username, password):
-	password = generate_password_hash(password)
-	result = db.users.find({'username':username,'password':password})
-	if (result > 0):
-		return username
+	result = db.users.find_one({'username':username})
+        if result != None and check_password_hash(result['password'],password):
+            print result['rowid']
+            return result['rowid']
 	return 0
     # dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
     # if dat and check_password_hash(dat[1], password):
@@ -122,13 +122,7 @@ def check_user_password(username, password):
 
 def get_user_by_id(userid):
     cursor = db.users.find({'rowid' : int(userid)})[0]
-    out =[cursor['rowid'],cursor['link']]
-    try:
-        if out[1] != -1:
-            return get_user_by_id(out[1])
-    except IndexError:
-        return out
-    return out[0]
+    return cursor['username']
     # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
