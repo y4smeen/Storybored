@@ -91,24 +91,9 @@ def get_users(self):
 def check_user_password(username, password):
 	result = db.users.find_one({'username':username})
         if result != None and check_password_hash(result['password'],password):
-            print result['rowid']
             return result['rowid']
 	return 0
 
 def get_user_by_id(userid):
     cursor = db.users.find({'rowid' : int(userid)})[0]
     return cursor['username']
-
-def remove_post(rowid):
-    link = db.stories.delete_one({'rowid':rowid})
-
-def remove_story(storyid):
-    link = remove_post(storyid)
-    if link > 0:
-        remove_story(link)
-
-def parse_simple_selection(output):
-    members = []
-    for member in output:
-        members.append(member[0])
-    return members
