@@ -107,15 +107,18 @@ def get_lowest_child(storyid):
     return out[0]
 
 def get_users(self):
-
-    return parse_simple_selection(c.execute("SELECT username FROM users;").fetchall())
+    return parse_simple_selection(db.users.find())
 
 def check_user_password(username, password):
-    dat = db.
-    dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
-    if dat and check_password_hash(dat[1], password):
-        return dat[0]
-    return 0;
+	password = generate_password_hash(password)
+	result = db.users.find({'username':username,'password':password})
+	if (result > 0):
+		return username
+	return 0
+    # dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
+    # if dat and check_password_hash(dat[1], password):
+    #     return dat[0]
+    # return 0;
 
 def get_user_by_id(userid):
     cursor = db.users.find({'rowid' : int(userid)})[0]
@@ -129,7 +132,7 @@ def get_user_by_id(userid):
     # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
-    link = db.stories.
+    link = db.stories.delete_one({'rowid':rowid})
     #link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
     #print "ROWID", rowid
     #c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
