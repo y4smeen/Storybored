@@ -1,25 +1,4 @@
-"""StoryBored SQLite database handler module.
 
-Allows for database communication. Instantiate with:
-
-    db = Database(<path to database>, <schema>)
-
-Schemas should be formatted as follows:
-
-    SCHEMA = [
-        ('<table1>', [
-            ('<col1>', 'type'),
-            ('<col2>', 'type'),
-            ...
-        ]),
-        ('<table2>', [
-            ('<col1>', 'type'),
-            ('<col2>', 'type'),
-            ...
-        ]),
-        ...
-    ]
-"""
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
@@ -64,8 +43,8 @@ def add_user(username, password):
 
 def update_user_password(username, new_password):
     password = generate_password_hash(new_password)
-    db.users.update_many({'username' : username,
-                            'password': new_password})
+    db.users.update({'username' : username},
+                    {'password': new_password})
 
 #~get_ titles,content,authors were never used so I deleted them
 
@@ -106,25 +85,7 @@ def get_lowest_child(storyid):
         return out
     return out[0]
 
-def get_users(self):
-    return 
 
-def check_user_password(username, password):
-    dat = db.users.findOne({'username':username}, {'_id': 0, 'password': 1} )
-    if check_password_hash(dat['password'], password):
-        return dat[0]
-    return 0
-
-def get_user_by_id(userid):
-    cursor = db.users.find({'userid' : int(userid)})[0]
-    out =[cursor['userid'],cursor['link']]
-    try:
-        if out[1] != -1:
-            return get_user_by_id(out[1])
-    except IndexError:
-        return out
-    return out[0]
-    # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
     db.stories.remove({'rowid': rowid}, 1)
@@ -134,4 +95,14 @@ def remove_story(storyid):
     if link > 0:
         remove_story(link)
 
+
+def check_user_password(username, password):
+	result = db.users.find_one({'username':username})
+        if result != None and check_password_hash(result['password'],password):
+            return result['rowid']
+	return 0
+
+def get_user_by_id(userid):
+    document = db.users.find({'rowid' : int(userid)})[0]
+    return document['username']
 

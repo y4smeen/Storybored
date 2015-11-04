@@ -63,7 +63,7 @@ def signup():
     if request.method=="GET":
         return render_template("signup.html")
     else:
-        # session["uname"] = request.form["user"]
+        session["uname"] = request.form["user"]
         database.add_user(request.form["user"], request.form["pass"])
         return redirect(url_for("login"))
 
