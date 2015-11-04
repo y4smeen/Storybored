@@ -22,24 +22,22 @@ Schemas should be formatted as follows:
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-# import sqlite3
 from pymongo import MongoClient
-
 
 connection = MongoClient()
 db = connection["storybored"]
 
 
 def add_story(title, author, contents, istop):
-    rid = get_next_rowid() + 1
+    rid = get_next_rowid("stories") + 1
     db.stories.insert({'title':title,
-                       'author': author,
+                       'author':str(author),
                        'contents':contents,
                        'link':-1,
                        'rowid': rid,
                        'istop': istop})
     return rid
-     
+
 
 #~used to link lines together based on rowid
 #~link = rowid of nextline
@@ -48,25 +46,26 @@ def update_story_link(story, link):
     db.stories.update({ 'rowid' : story },
                       { '$set' : { 'link' : link } })
 
-#~gets highest rowid in stories
-def get_next_rowid(self):
-    cursor = db.stories.find().sort([('rowid', -1)]).limit(1)
+#~gets highest rowid in collection
+def get_next_rowid(collection):
+    cursor = db[collection].find().sort([('rowid', -1)]).limit(1)
     try:
         rid = cursor[0]['rowid']
-    except IndexError:
+    except (IndexError, KeyError):
         rid = 0
     return rid
 
 
 def add_user(username, password):
     password = generate_password_hash(password)
-    db.users.insert({'username' : username, 
-    				 'password' : password })
+    db.users.insert({'username' : username,
+                     'password' : password,
+                     'rowid' : get_next_rowid('users')+1})
 
 def update_user_password(username, new_password):
     password = generate_password_hash(new_password)
-    c.execute("UPDATE users SET password=(?) WHERE username=(?);", (password, username))
-    db.commit()
+    db.users.update_many({'username' : username,
+                            'password': new_password})
 
 #~get_ titles,content,authors were never used so I deleted them
 
@@ -74,33 +73,32 @@ def update_user_password(username, new_password):
 #~userid = -1, all top posts otherwise for_user
 def get_top_posts(userid):
     if userid == -1:
-        cursor = db.stories.find({'istop': '1'})
+        cursor = db.stories.find({ 'rowid' : { '$exists': True}, 'istop': 1})
     else:
-        cursor = db.stories.find({'istop':'1'},{'author':userid})
+        cursor = db.stories.find({ 'rowid' : { '$exists': True}, 'istop':1,'author':str(userid)})
     l = []
-    for document in cursor:
-        l.append([document['rowid'], document['title']])
+    for doc in cursor:
+        l.append([doc['rowid'],doc['title'],doc['author']])
     return l
 
 #~returns list of lines linked to eachother by rowids
 def get_story_content(storyid):
-    cursor = db.stories.find({'rowid':storyid})
-    out = [cursor[0]['contents'],cursor[0]['link'],cursor[0]['author']]
+    cursor = db.stories.find({'rowid':int(storyid)})[0]
+    out = [cursor['contents'],cursor['link'],cursor['author']]
     try:
         if out[1] != -1:
             insert = get_story_content(out[1])
             out = [(out[0],out[2])]
             out.extend(insert)
             return out
-
     except IndexError:
         return out
     return [(out[0], out[2])]
 
 #~returns the rowid of the line before storyid
 def get_lowest_child(storyid):
-    cursor = db.stories.find({'rowid':storyid})
-    out =[cursor[0]['rowid'],cursor[0]['link']]
+    cursor = db.stories.find({'rowid' : int(storyid)})[0]
+    out =[cursor['rowid'],cursor['link']]
     try:
         if out[1] != -1:
             return get_lowest_child(out[1])
@@ -109,23 +107,27 @@ def get_lowest_child(storyid):
     return out[0]
 
 def get_users(self):
-    return parse_simple_selection(c.execute("SELECT username FROM users;").fetchall())
+    return 
 
 def check_user_password(username, password):
-    dat = db.users.findOne({'username':username}, {'password': 1} )
+    dat = db.users.findOne({'username':username}, {'_id': 0, 'password': 1} )
     if check_password_hash(dat['password'], password):
         return dat[0]
     return 0
 
 def get_user_by_id(userid):
-    return c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
+    cursor = db.users.find({'userid' : int(userid)})[0]
+    out =[cursor['userid'],cursor['link']]
+    try:
+        if out[1] != -1:
+            return get_user_by_id(out[1])
+    except IndexError:
+        return out
+    return out[0]
+    # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
-    link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
-    print "ROWID", rowid
-    c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
-    db.commit()
-    return link
+    db.stories.remove({'rowid': rowid}, 1)
 
 def remove_story(storyid):
     link = remove_post(storyid)
@@ -133,18 +135,3 @@ def remove_story(storyid):
         remove_story(link)
 
 
-def parse_simple_selection(output):
-    members = []
-    for member in output:
-        members.append(member[0])
-    return members
-
-def format_schema(schema):
-    output_match = []
-    for table in schema:
-        statement = u'CREATE TABLE ' + table[0] + ' ('
-        for col in table[1]:
-            statement += col[0] + ' ' + col[1] + ', '
-        statement = statement[:-2] + ')'
-        output_match.append((statement,))
-    return output_match
