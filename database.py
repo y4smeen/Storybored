@@ -22,7 +22,6 @@ Schemas should be formatted as follows:
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-# import sqlite3
 from pymongo import MongoClient
 
 connection = MongoClient()
@@ -38,7 +37,7 @@ def add_story(title, author, contents, istop):
                        'rowid': rid,
                        'istop': istop})
     return rid
-     
+
 
 #~used to link lines together based on rowid
 #~link = rowid of nextline
@@ -59,14 +58,14 @@ def get_next_rowid(collection):
 
 def add_user(username, password):
     password = generate_password_hash(password)
-    db.users.insert({'username' : username, 
+    db.users.insert({'username' : username,
                      'password' : password,
                      'rowid' : get_next_rowid('users')+1})
 
 def update_user_password(username, new_password):
     password = generate_password_hash(new_password)
-    c.execute("UPDATE users SET password=(?) WHERE username=(?);", (password, username))
-    db.commit()
+    db.users.update_many({'username' : username,
+                            'password': new_password})
 
 #~get_ titles,content,authors were never used so I deleted them
 
@@ -98,7 +97,7 @@ def get_story_content(storyid):
 
 #~returns the rowid of the line before storyid
 def get_lowest_child(storyid):
-    cursor = db.stories.find({'rowid':int(storyid)})[0]
+    cursor = db.stories.find({'rowid' : int(storyid)})[0]
     out =[cursor['rowid'],cursor['link']]
     try:
         if out[1] != -1:
@@ -108,6 +107,7 @@ def get_lowest_child(storyid):
     return out[0]
 
 def get_users(self):
+
     return parse_simple_selection(c.execute("SELECT username FROM users;").fetchall())
 
 def check_user_password(username, password):
@@ -117,14 +117,23 @@ def check_user_password(username, password):
     return 0;
 
 def get_user_by_id(userid):
-    return c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
+    cursor = db.users.find({'userid' : int(userid)})[0]
+    out =[cursor['userid'],cursor['link']]
+    try:
+        if out[1] != -1:
+            return get_user_by_id(out[1])
+    except IndexError:
+        return out
+    return out[0]
+    # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
-    link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
-    print "ROWID", rowid
-    c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
-    db.commit()
-    return link
+
+    #link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
+    #print "ROWID", rowid
+    #c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
+    #db.commit()
+    #return link
 
 def remove_story(storyid):
     link = remove_post(storyid)
@@ -132,17 +141,17 @@ def remove_story(storyid):
         remove_story(link)
 
 def parse_simple_selection(output):
-    members = []
-    for member in output:
-        members.append(member[0])
-    return members
+    #members = []
+    #for member in output:
+    #    members.append(member[0])
+    #return members
 
-def format_schema(schema):
-    output_match = []
-    for table in schema:
-        statement = u'CREATE TABLE ' + table[0] + ' ('
-        for col in table[1]:
-            statement += col[0] + ' ' + col[1] + ', '
-        statement = statement[:-2] + ')'
-        output_match.append((statement,))
-    return output_match
+#def format_schema(schema):
+#    output_match = []
+#    for table in schema:
+#        statement = u'CREATE TABLE ' + table[0] + ' ('
+#        for col in table[1]:
+#            statement += col[0] + ' ' + col[1] + ', '
+#        statement = statement[:-2] + ')'
+#        output_match.append((statement,))
+#    return output_match
