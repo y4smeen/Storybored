@@ -1,25 +1,4 @@
-"""StoryBored SQLite database handler module.
 
-Allows for database communication. Instantiate with:
-
-    db = Database(<path to database>, <schema>)
-
-Schemas should be formatted as follows:
-
-    SCHEMA = [
-        ('<table1>', [
-            ('<col1>', 'type'),
-            ('<col2>', 'type'),
-            ...
-        ]),
-        ('<table2>', [
-            ('<col1>', 'type'),
-            ('<col2>', 'type'),
-            ...
-        ]),
-        ...
-    ]
-"""
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
@@ -115,23 +94,13 @@ def check_user_password(username, password):
             print result['rowid']
             return result['rowid']
 	return 0
-    # dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
-    # if dat and check_password_hash(dat[1], password):
-    #     return dat[0]
-    # return 0;
 
 def get_user_by_id(userid):
     cursor = db.users.find({'rowid' : int(userid)})[0]
     return cursor['username']
-    # c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
 
 def remove_post(rowid):
     link = db.stories.delete_one({'rowid':rowid})
-    #link = c.execute("SELECT link FROM stories WHERE rowid=(?);", (str(rowid),)).fetchone()
-    #print "ROWID", rowid
-    #c.execute("DELETE FROM stories WHERE rowid=(?);", (str(rowid),))
-    #db.commit()
-    #return link
 
 def remove_story(storyid):
     link = remove_post(storyid)
@@ -143,13 +112,3 @@ def parse_simple_selection(output):
     for member in output:
         members.append(member[0])
     return members
-
-#def format_schema(schema):
-#    output_match = []
-#    for table in schema:
-#        statement = u'CREATE TABLE ' + table[0] + ' ('
-#        for col in table[1]:
-#            statement += col[0] + ' ' + col[1] + ', '
-#        statement = statement[:-2] + ')'
-#        output_match.append((statement,))
-#    return output_match
