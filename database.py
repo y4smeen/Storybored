@@ -112,10 +112,10 @@ def get_users(self):
     return parse_simple_selection(c.execute("SELECT username FROM users;").fetchall())
 
 def check_user_password(username, password):
-    dat = c.execute("SELECT rowid, password FROM users WHERE username=(?);", (username,)).fetchone()
-    if dat and check_password_hash(dat[1], password):
+    dat = db.users.findOne({'username':username}, {'password': 1} )
+    if check_password_hash(dat['password'], password):
         return dat[0]
-    return 0;
+    return 0
 
 def get_user_by_id(userid):
     return c.execute("SELECT username FROM users WHERE rowid=(?);", (str(userid),)).fetchone()[0]
@@ -131,7 +131,7 @@ def remove_story(storyid):
     link = remove_post(storyid)
     if link > 0:
         remove_story(link)
->>>>>>> 5168210bc3f1059ecd7ae0c5aea6316b64c05dbe
+
 
 def parse_simple_selection(output):
     members = []
