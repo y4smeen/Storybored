@@ -10,7 +10,7 @@ Bloginator Project, Zamansky 2015
  People may post starts to stories and other users are able to add lines to these stories. 
 
 
-* (Refactoring) Team Members
+* (Refactoring + Moving to MongoDB) Team Members
 
 | Group Members  |
 |----------------|  
